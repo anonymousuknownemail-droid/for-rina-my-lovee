@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>For You Rinaa ❤️</title>
+    <style>
+        /* (style-nya sama persis seperti punya kamu, tidak berubah) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: linear-gradient(135deg, #000000, #1a001a, #2d0030);
+            color: #f5f5f5;
+            text-align: center;
+            overflow-x: hidden;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            min-height: 100vh;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        p, h1, h2 {
+            text-shadow: 0 0 8px rgba(255, 200, 230, 0.5);
+            letter-spacing: 0.5px;
+        }
+
+        h1 {
+            color: #ffb3d9;
+            text-shadow: 0 0 12px #ff3388, 0 0 25px #ff4da6;
+        }
+
+        .screen {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 20;
+            transition: opacity 0.8s ease;
+        }
+
+        #startScreen {
+            background: radial-gradient(circle at center, #0a000f, #000000);
+            z-index: 25;
+        }
+
+        #startScreen h2 {
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            color: #ffbfe6;
+            text-shadow: 0 0 10px #ff66b5;
+        }
+
+        #cinematic {
+            background: radial-gradient(circle at center, #0a0015, #000000);
+            z-index: 20;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.9s ease, visibility 0s linear 0.9s;
+        }
+
+        #cinematic.active {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.9s ease, visibility 0s linear 0s;
+        }
+
+        .fadeText {
+            opacity: 0;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 20px;
+            color: #ffe0f0;
+            text-shadow: 0 0 15px #ff66b5;
+            transition: opacity 1.6s ease;
+            max-width: 85%;
+        }
+
+        button {
+            padding: 14px 38px;
+            border-radius: 50px;
+            border: none;
+            background: linear-gradient(135deg, #ff2b85, #ff80bf);
+            color: white;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 77, 166, 0.9);
+            transition: all 0.25s ease;
+            font-family: inherit;
+        }
+
+        button:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 30px #ff4da6;
+        }
+
+        #main {
+            display: none;
+            padding-bottom: 80px;
+            position: relative;
+            z-index: 5;
+            background: linear-gradient(135deg, #000000, #1a001a);
+        }
+
+        .cake {
+            font-size: 100px;
+            margin: 30px 0 10px;
+            animation: bounceCake 2.5s infinite ease;
+            filter: drop-shadow(0 0 12px #ff99cc);
+        }
+
+        @keyframes bounceCake {
+            0%,100% { transform: translateY(0px); }
+            50% { transform: translateY(-18px); }
+        }
+
+        #typing {
+            font-size: 1.3rem;
+            background: rgba(0,0,0,0.5);
+            display: inline-block;
+            padding: 18px 28px;
+            border-radius: 30px;
+            backdrop-filter: blur(6px);
+            margin: 20px auto;
+            max-width: 90%;
+            border: 1px solid rgba(255,128,191,0.3);
+            text-align: left;
+            line-height: 1.6;
+        }
+
+        #gallery {
+            margin-top: 70px;
+            padding: 40px 20px;
+        }
+
+        #gallery h2 {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: #ffb3da;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            padding: 15px 12px 20px;
+            backdrop-filter: blur(12px);
+            transition: 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            opacity: 0;
+            transform: translateY(50px);
+            border: 1px solid rgba(255,200,230,0.3);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: scale(1.03) translateY(-8px);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #ff99cc;
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 20px;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            background: #2a1a2a;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+            pointer-events: none;
+        }
+
+        .card p {
+            margin-top: 14px;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .zoom-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0.2s, opacity 0.3s ease;
+            cursor: pointer;
+        }
+
+        .zoom-modal.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: zoomInScale 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+        }
+
+        @keyframes zoomInScale {
+            from {
+                transform: scale(0.85);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 28px;
+            box-shadow: 0 0 40px rgba(255, 77, 166, 0.6);
+            border: 3px solid rgba(255, 128, 191, 0.6);
+            object-fit: contain;
+        }
+
+        .modal-caption {
+            margin-top: 20px;
+            color: #ffc0e0;
+            font-size: 1.2rem;
+            background: rgba(0,0,0,0.6);
+            padding: 8px 24px;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+            font-weight: 500;
+        }
+
+        .close-hint {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            background: rgba(0,0,0,0.5);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+            backdrop-filter: blur(8px);
+        }
+
+        .close-hint:hover {
+            background: #ff3388;
+            transform: scale(1.1);
+        }
+
+        #ending {
+            margin-top: 130px;
+            padding: 80px 25px 120px;
+            background: radial-gradient(ellipse at top, rgba(30,0,30,0.7), transparent);
+        }
+
+        .line {
+            opacity: 0;
+            margin: 32px auto;
+            font-size: 1.35rem;
+            max-width: 700px;
+            font-weight: 500;
+            transition: opacity 0.9s ease, transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            transform: translateY(30px);
+            color: #ffe6f0;
+        }
+
+        .final {
+            opacity: 0;
+            margin-top: 70px;
+            font-size: 2.3rem;
+            color: #ff99cc;
+            text-shadow: 0 0 18px #ff4d94;
+            transition: opacity 1.5s ease, transform 0.9s ease;
+            transform: scale(0.96);
+        }
+
+        #secret {
+            position: fixed;
+            bottom: 30px;
+            right: 20px;
+            background: #ff1493e6;
+            color: white;
+            padding: 14px 22px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1rem;
+            z-index: 200;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            display: none;
+            animation: slideIn 0.5s ease;
+            font-family: monospace;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(60px);}
+            to { opacity: 1; transform: translateX(0);}
+        }
+
+        canvas#starsCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        #hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 15;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 1.7rem;
+            user-select: none;
+            filter: drop-shadow(0 0 4px hotpink);
+            animation: fallHeart linear forwards;
+        }
+
+        @keyframes fallHeart {
+            0% {
+                transform: translateY(-20vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .fadeText { font-size: 1.3rem; }
+            .line { font-size: 1.05rem; margin: 28px auto; }
+            .final { font-size: 1.8rem; }
+            .cake { font-size: 75px; }
+            #typing { font-size: 1rem; padding: 14px 20px; }
+            .grid { gap: 18px; }
+            .modal-caption { font-size: 0.9rem; }
+            .close-hint { width: 40px; height: 40px; font-size: 1.5rem; top: 15px; right: 15px; }
+        }
+
+        .credit {
+            margin: 30px auto 10px;
+            font-size: 11px;
+            opacity: 0.4;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="starsCanvas"></canvas>
+<div id="hearts"></div>
+
+<div id="startScreen" class="screen">
+    <h2>💌 pencet dibawah tu ya sayangg 😘💖</h2>
+    <button id="btnStartNow">KLIK ✨</button>
+</div>
+
+<div id="cinematic" class="screen">
+    <p class="fadeText" id="c1">✨ hallo sayangkuuu ✨</p>
+    <p class="fadeText" id="c2">aku punya sesuatu buat kamu niih 🤍</p>
+    <p class="fadeText" id="c3">aku bikin ini khusus buat kamuuu... ❤️🥺</p>
+</div>
+
+<div id="main">
+    <audio id="bgMusic" loop preload="auto">
+        <source src="lagu.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="cake">🎂💖</div>
+    <h1 id="secretTrigger">Happy Birthday Sayangkuu 💕</h1>
+    <p id="typing"></p>
+
+    <div id="gallery">
+        <h2>📸 our memories 🤍</h2>
+        <div class="grid">
+            <div class="card" data-caption="foto masa masa kita masi jadi temen 🥺✨">
+                <img src="foto pertama masi temen.jpg" alt="Kenangan 1" onerror="this.src='https://placehold.co/400x400/ff99cc/ffffff?text=❤️+Kenangan'">
+                <p>foto masa masa kita masi jadi temen 🥺✨</p>
+            </div>
+            <div class="card" data-caption="ini foto yang difotoin sama canez pas banget 5 hari setelah kita jadian hihii 💖">
+                <img src="foto 5 hari abis jadian.jpg" alt="Kenangan 2" onerror="this.src='https://placehold.co/400x400/ffb3d9/660033?text=💖+Momen+Manis'">
+                <p>ini foto yang difotoin sama canez pas banget 5 hari setelah kita jadian hihii 💖</p>
+            </div>
+            <div class="card" data-caption="kapan ya kita bisa jalan lagi sambil bercanda kaya gini 😭💕">
+                <img src="foto jalan ke ggp.jpg" alt="Kenangan 3" onerror="this.src='https://placehold.co/400x400/ff80bf/33001a?text=😭+Tawa+Kita'">
+                <p>kapan ya kita bisa jalan lagi sambil bercanda kaya ginii 😭💕</p>
+            </div>
+            <div class="card" data-caption="ini momen pas kamu minta aku buat nyamperin kamu pas kamu lagi kerkom informatika ❤️">
+                <img src="foto tugas kerkom.jpg" alt="Kenangan 4" onerror="this.src='https://placehold.co/400x400/ff66aa/1a000d?text=❤️+Alasan+Cinta'">
+                <p>ini momen pas kamu minta aku buat nyamperin kamu pas kamu lagi kerkom informatika ❤️</p>
+            </div>
+            <div class="card" data-caption="hari sumpah pemuda dimana hari itu pas banget 8 hari setelah kita jadiann 😆">
+                <img src="foto hari batik.jpg" alt="Kenangan 5" onerror="this.src='https://placehold.co/400x400/ff66aa/1a000d?text=❤️+Alasan+Cinta'">
+                <p>hari sumpah pemuda dimana hari itu pas banget 8 hari setelah kita jadiann 😆</p>
+            </div>
+            <div class="card" data-caption="tepat 5 november 2025 kamu ngerayain ulang tahun akuu, dan itu menjadi hari yang paing berharga buat akuu 🥺💌">
+                <img src="foto ultah.jpg" alt="Kenangan 6" onerror="this.src='https://placehold.co/400x400/ff66aa/1a000d?text=❤️+Alasan+Cinta'">
+                <p>tepat 5 november 2025 kamu ngerayain ulang tahun akuu, dan itu menjadi hari yang paling berharga buat akuu 🥺💌</p>
+            </div>
+            <div class="card" data-caption="foto dimana kamu pertama kali aku ajak ke perpusnas buat nemenin aku balikin bukuu 🥰">
+                <img src="foto jalan.jpg" alt="Kenangan 7" onerror="this.src='https://placehold.co/400x400/ff66aa/1a000d?text=❤️+Alasan+Cinta'">
+                <p>foto dimana kamu pertama kali aku ajak ke perpusnas buat nemenin aku balikin bukuu 🥰</p>
+            </div>
+            <div class="card" data-caption="ini juga masi di perpusnas wkwkwk ( itu yang dibelakang ngepain yakk 😂 )">
+                <img src="foto perpusnas.jpg" alt="Kenangan 8" onerror="this.src='https://placehold.co/400x400/ff66aa/1a000d?text=❤️+Alasan+Cinta'">
+                <p>ini juga masi di perpusnas wkwkwk ( itu yang dibelakang ngepain yakk 😂 )</p>
+            </div>
+            <div class="card" data-caption="klo ini foto pas kamu abis tampil di hari guruu ( padahal awal nya bilang nya bukan tampil tapi jadi tim perkap 🤪)">
+                <img src="foto rina tampil.jpg" alt="Kenangan 9" onerror="this.src='https://placehold.co/400x400/ff66aa/1a000d?text=❤️+Alasan+Cinta'">
+                <p>klo ini foto pas kamu abis tampil di hari guruu ( padahal awal nya bilang nya bukan tampil tapi jadi tim perkap 🤪)</p>
+            </div>
+            <div class="card" data-caption="nah klo ini mah hati hati ada anomalii wkwkwk😵">
+                <img src="foto anomali.jpg" alt="Kenangan 10" onerror="this.src='https://placehold.co/400x400/ff66aa/1a000d?text=❤️+Alasan+Cinta'">
+                <p>nah klo ini mah hati hati ada anomalii wkwkwk😵</p>
+            </div>
+             <div class="card" data-caption="klo yang ini gatau kenapa dehh yaa awkkwowko🤣🥲">
+                <img src="foto gatau.jpg" alt="Kenangan 11" onerror="this.src='https://placehold.co/400x400/ff66aa/1a000d?text=❤️+Alasan+Cinta'">
+                <p>klo yang ini gatau kenapa dehh yaa awkkwowko🤣🥲</p>
+            </div>
+            <div class="card" data-caption="emm kayanya ini udah ngantuk bangett yaa ehehehe 😴😪">
+                <img src="foto bobo.png" alt="Kenangan 12" onerror="this.src='https://placehold.co/400x400/ff66aa/1a000d?text=❤️+Alasan+Cinta'">
+                <p>emm kayanya ini udah ngantuk bangett yaa ehehehe 😴😪</p>
+            </div>
+            <div class="card" data-caption="nahini ada oraang cantik bangeett tiba tiba muncul di galeri hp akuu 😘">
+                <img src="foto rina.jpg" alt="Kenangan 13" onerror="this.src='https://placehold.co/400x400/ff66aa/1a000d?text=❤️+Alasan+Cinta'">
+                <p>nahini ada oraang cantik bangeett tiba tiba muncul di galeri hp akuu 😘</p>
+            </div>
+            <div class="card" data-caption="nahh, klo yang ini tu muncul nya di laptop akuu ihihii, dan juga samaa orang nya cantik jugaaa😍">
+                <img src="foto rina cantik.jpg" alt="Kenangan 14" onerror="this.src='https://placehold.co/400x400/ff66aa/1a000d?text=❤️+Alasan+Cinta'">
+                <p>nahh, klo yang ini tu muncul nya di laptop akuu ihihii, dan juga samaa orang nya cantik jugaaa😍</p>
+            </div>
+            <div class="card" data-caption="ini foto terakhir yang bakal muncul di memories ini, dimanaa ini adalah foto photobooth pertama kali kitaa dan juga menjadi foto pertama aku di photobooth karna sebelumnya aku gapernah punya rasa tertarik sama yang namanya photobooth ❤️🤨">
+                <img src="foto photobooth.jpg" alt="Kenangan 15" onerror="this.src='https://placehold.co/400x400/ff66aa/1a000d?text=❤️+Alasan+Cinta'">
+                <p>ini foto terakhir yang bakal muncul di memories ini, dimanaa ini adalah foto photobooth pertama kali kitaa dan juga menjadi foto pertama aku di photobooth ❤️🤨</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="ending">
+        <p class="line">🌸 terimakasi yaa sayangkuu kamu masi bisa bertahan sampai sekaraang 🌸</p>
+        <p class="line">terimaksi jugaa udah bisa hadir di hidup akuu, udah jadi tempat aku ceritaa, jadi tempat aku pulaang</p>
+        <p class="line">🏠 dan jadi orang yang selalu bikin hidup aku berwarnaa</p>
+        <p class="line">semogaaa kita bisa bertahan terus yaa sampai selamaanyaa🏡</p>
+        <p class="line">🌙 dan kita bisa ngehadapin masalah yang ada bersama samaaa</p>
+        <p class="line">satu hal yang aku pengen banget kamu tauuu</p>
+        <h1 class="final">✨ ii lovee youu soouu muchhh ❤️✨</h1>
+    </div>
+    <div class="credit">akuu sayaang bangett samaa kamuuu 🌹</div>
+</div>
+
+<div id="secret">ehhh ko nemu ajaa wkwkwk, ywda intinya hadiah ulang tahun kamuu aku titipin di aurel yaaa</div>
+
+<div id="zoomModal" class="zoom-modal">
+    <div class="close-hint" id="closeModalBtn">✕</div>
+    <div class="modal-content">
+        <img id="modalImage" src="" alt="Zoom">
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
+</div>
+
+<script>
+    (function(){
+        const startScreenDiv = document.getElementById('startScreen');
+        const cinematicDiv = document.getElementById('cinematic');
+        const mainDiv = document.getElementById('main');
+        const music = document.getElementById('bgMusic');
+        const secretBox = document.getElementById('secret');
+        const secretTrigger = document.getElementById('secretTrigger');
+        const startButton = document.getElementById('btnStartNow');
+        
+        const zoomModal = document.getElementById('zoomModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalCaption = document.getElementById('modalCaption');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        
+        const c1 = document.getElementById('c1');
+        const c2 = document.getElementById('c2');
+        const c3 = document.getElementById('c3');
+        
+        // ==================== TYPING EFFECT YANG SUDAH DIPERBAIKI ====================
+        const fullText = "ihihihii cieee, sekarang ada yang makin tuwaa 💖\n\nAkhirnya sekarang umur kamu udah sama kaya akuu.. 61 tahuun ehehe 🤭\n\nPertama-tamaa, aku mau minta maaf duluu yaa sayangku.. Karena aku gabisa ada disamping kamu disaat ulang tahun kamuu 🥺\nAku tau pasti kamu sedihh, dan jujur aku juga ngerasaa sedihh\nTapi ywdaa aku bikin ini khusus buat kamuu, biar sedikit bisa ngurangin rasa sedih kamu hari ini dan bisa bikin kamu seneeeng 🤍\n\nWalaupun sekarang aku gabisa ada disamping kamuu, semoga kamu tetep bisa ngerasain seberapa spesial nya hari ini yaa\n\nSekali lagii happy birthdayy yaa sayaangkuu 🎂✨\nSemoga semua yang kamu harapin bisa terwujudd dan semua hal baik dateng terus buat kamuu, dan doain ajaa yaa semogaa nanti diulang tahun kamu yang selanjutnyaa kita bisa ngerayain bareng barengg yaaa 💫\n\nFrom: Pacar kamu yang palingg nyebeeliiinnn 😜\nNote: Dibawah aku nyantumin beberapa foto foto kita berduaa, ini jawaban klo kamu suka nanyaa kenapa aku suka nyimpen foto-foto kamuu ato kita berduaa\nKarna aku mau foto-foto kita bisa menjadi kenangan yang selalu bisa kita inget teruss dan bisa kita liat teruuss ihihihii 😝";
+        let typingIndex = 0;
+        const typingEl = document.getElementById('typing');
+        
+        function typeWriter() {
+            if(typingIndex < fullText.length) {
+                let char = fullText.charAt(typingIndex);
+                if (char === '\n') {
+                    typingEl.innerHTML += '<br>';
+                } else {
+                    typingEl.innerHTML += char;
+                }
+                typingIndex++;
+                setTimeout(typeWriter, 90);
+            }
+        }
+        // ========================================================================
+        
+        let heartInterval = null;
+        function startHeartRain() {
+            if(heartInterval) clearInterval(heartInterval);
+            heartInterval = setInterval(() => {
+                if(mainDiv && mainDiv.style.display === "block") {
+                    createHeart();
+                }
+            }, 220);
+        }
+        
+        function createHeart() {
+            const heartDiv = document.createElement('div');
+            heartDiv.classList.add('heart');
+            const loveIcons = ['💖', '❤️', '💕', '💗', '🌸', '✨', '💘', '🌹'];
+            heartDiv.innerHTML = loveIcons[Math.floor(Math.random() * loveIcons.length)];
+            const size = Math.random() * 22 + 18;
+            heartDiv.style.fontSize = size + 'px';
+            heartDiv.style.left = Math.random() * 100 + '%';
+            heartDiv.style.animationDuration = (Math.random() * 3 + 2.8) + 's';
+            heartDiv.style.opacity = Math.random() * 0.7 + 0.4;
+            document.getElementById('hearts').appendChild(heartDiv);
+            setTimeout(() => { if(heartDiv && heartDiv.remove) heartDiv.remove(); }, 5500);
+        }
+        
+        function startMusicWithCinematic() {
+            if(music) {
+                music.currentTime = 0;
+                music.play().then(() => {
+                    music.volume = 0.45;
+                }).catch(e => {
+                    setTimeout(() => {
+                        music.play().catch(()=>{});
+                    }, 100);
+                });
+            }
+        }
+        
+        function showCinematicAndContinue() {
+            cinematicDiv.classList.add('active');
+            startMusicWithCinematic();
+            
+            if(c1) c1.style.opacity = "0";
+            if(c2) c2.style.opacity = "0";
+            if(c3) c3.style.opacity = "0";
+            
+            setTimeout(() => { if(c1) c1.style.opacity = "1"; }, 500);
+            setTimeout(() => { if(c2) c2.style.opacity = "1"; }, 2500);
+            setTimeout(() => { if(c3) c3.style.opacity = "1"; }, 4500);
+            
+            setTimeout(() => {
+                cinematicDiv.classList.remove('active');
+                cinematicDiv.style.visibility = "hidden";
+                cinematicDiv.style.opacity = "0";
+                mainDiv.style.display = "block";
+                
+                typingEl.innerHTML = "";
+                typingIndex = 0;
+                typeWriter();
+                startHeartRain();
+                setTimeout(() => {
+                    revealCardsOnScroll();
+                    checkEndingWithSlowReveal();
+                }, 300);
+            }, 6800);
+        }
+        
+        function onStartClick() {
+            startScreenDiv.style.opacity = "0";
+            setTimeout(() => {
+                startScreenDiv.style.display = "none";
+            }, 500);
+            showCinematicAndContinue();
+        }
+        
+        if(startButton) {
+            startButton.addEventListener('click', onStartClick);
+        }
+        
+        const cards = document.querySelectorAll('.card');
+        
+        function openZoom(imgSrc, captionText) {
+            modalImage.src = imgSrc;
+            modalCaption.innerText = captionText;
+            zoomModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeZoom() {
+            zoomModal.classList.remove('active');
+            document.body.style.overflow = '';
+            setTimeout(() => {
+                if(!zoomModal.classList.contains('active')) {
+                    modalImage.src = '';
+                }
+            }, 300);
+        }
+        
+        cards.forEach(card => {
+            const imgElement = card.querySelector('img');
+            const caption = card.getAttribute('data-caption') || card.querySelector('p')?.innerText || 'Kenangan Indah 💖';
+            card.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if(imgElement && imgElement.src) {
+                    openZoom(imgElement.src, caption);
+                } else {
+                    openZoom('https://placehold.co/600x600/ff99cc/ffffff?text=❤️', caption);
+                }
+            });
+        });
+        
+        if(closeModalBtn) {
+            closeModalBtn.addEventListener('click', closeZoom);
+        }
+        zoomModal.addEventListener('click', (e) => {
+            if(e.target === zoomModal) {
+                closeZoom();
+            }
+        });
+        
+        const starCanvas = document.getElementById('starsCanvas');
+        let starCtx = starCanvas.getContext('2d');
+        let starArray = [];
+        let width, height;
+        
+        function resizeStars() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            starCanvas.width = width;
+            starCanvas.height = height;
+            initStars();
+        }
+        
+        function initStars() {
+            starArray = [];
+            const starCount = Math.min(200, Math.floor(width * height / 5000));
+            for(let i=0; i<starCount; i++) {
+                starArray.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 2.2 + 1,
+                    alpha: Math.random() * 0.6 + 0.3,
+                    twinkle: Math.random() * 0.05 + 0.02
+                });
+            }
+        }
+        
+        let starPhase = 0;
+        function drawStars() {
+            if(!starCtx) return;
+            starCtx.clearRect(0, 0, width, height);
+            for(let s of starArray) {
+                const twinkleFactor = 0.6 + 0.4 * Math.sin(starPhase + s.x * 0.01);
+                starCtx.globalAlpha = Math.min(0.9, s.alpha * twinkleFactor);
+                starCtx.fillStyle = 'white';
+                starCtx.beginPath();
+                starCtx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+                starCtx.fill();
+            }
+            starCtx.globalAlpha = 1;
+            starPhase += 0.02;
+            requestAnimationFrame(drawStars);
+        }
+        
+        window.addEventListener('resize', () => resizeStars());
+        resizeStars();
+        drawStars();
+        
+        function revealCardsOnScroll() {
+            const cardsAll = document.querySelectorAll('.card');
+            cardsAll.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                if(rect.top < window.innerHeight - 80) {
+                    card.style.opacity = "1";
+                    card.style.transform = "translateY(0px)";
+                }
+            });
+        }
+        
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0px)";
+                    cardObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2, rootMargin: "0px 0px -30px 0px" });
+        
+        document.querySelectorAll('.card').forEach(card => cardObserver.observe(card));
+        window.addEventListener('scroll', revealCardsOnScroll);
+        
+        let endingRevealed = false;
+        let endingAnimationStarted = false;
+        
+        function revealEndingLinesSlowly() {
+            if(endingAnimationStarted) return;
+            endingAnimationStarted = true;
+            
+            const lines = document.querySelectorAll('#ending .line');
+            const finalText = document.querySelector('#ending .final');
+            
+            lines.forEach(line => {
+                line.style.opacity = "0";
+                line.style.transform = "translateY(30px)";
+            });
+            if(finalText) {
+                finalText.style.opacity = "0";
+                finalText.style.transform = "scale(0.96)";
+            }
+            
+            lines.forEach((line, idx) => {
+                setTimeout(() => {
+                    line.style.opacity = "1";
+                    line.style.transform = "translateY(0px)";
+                }, idx * 880);
+            });
+            
+            const lastDelay = lines.length * 1600;
+            setTimeout(() => {
+                if(finalText) {
+                    finalText.style.opacity = "1";
+                    finalText.style.transform = "scale(1)";
+                }
+            }, lastDelay + 1000);
+        }
+        
+        function checkEndingWithSlowReveal() {
+            if(endingRevealed) return;
+            const endingSection = document.getElementById('ending');
+            if(!endingSection) return;
+            const rect = endingSection.getBoundingClientRect();
+            if(rect.top < window.innerHeight - 100) {
+                endingRevealed = true;
+                revealEndingLinesSlowly();
+                window.removeEventListener('scroll', scrollEndingCheck);
+            }
+        }
+        
+        function scrollEndingCheck() {
+            checkEndingWithSlowReveal();
+        }
+        
+        window.addEventListener('scroll', scrollEndingCheck);
+        
+        const endingObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting && !endingRevealed) {
+                    endingRevealed = true;
+                    revealEndingLinesSlowly();
+                    endingObserver.disconnect();
+                }
+            });
+        }, { threshold: 0.25 });
+        
+        const endingElement = document.getElementById('ending');
+        if(endingElement) endingObserver.observe(endingElement);
+        
+        if(secretTrigger) {
+            secretTrigger.style.cursor = "pointer";
+            secretTrigger.addEventListener('click', () => {
+                if(secretBox) {
+                    secretBox.style.display = "block";
+                    setTimeout(() => {
+                        secretBox.style.opacity = "0";
+                        setTimeout(() => {
+                            secretBox.style.display = "none";
+                            secretBox.style.opacity = "1";
+                        }, 500);
+                    }, 3800);
+                }
+            });
+        }
+        
+        const allImgs = document.querySelectorAll('.card img');
+        allImgs.forEach(img => {
+            img.addEventListener('error', function() {
+                if(!this.dataset.fallback) {
+                    this.dataset.fallback = "true";
+                    this.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ff99cc'/%3E%3Ctext x='50' y='55' font-size='14' text-anchor='middle' fill='white'%3E❤️%3C/text%3E%3C/svg%3E";
+                }
+            });
+        });
+        
+        if(music) {
+            music.addEventListener('error', () => console.log("lagu.mp3 tidak ada"));
+        }
+        
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .line { transition: opacity 0.9s cubic-bezier(0.2, 0.9, 0.4, 1.2), transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1); }
+            .final { transition: opacity 1.4s ease, transform 0.9s cubic-bezier(0.2, 0.9, 0.4, 1.2); }
+            #cinematic { transition: opacity 0.9s ease, visibility 0s linear 0.9s; }
+            #cinematic.active { transition: opacity 0.9s ease, visibility 0s linear 0s; }
+            #startScreen { transition: opacity 0.5s ease; }
+        `;
+        document.head.appendChild(style);
+        
+        mainDiv.style.display = "none";
+    })();
+</script>
+</body>
+</html>
