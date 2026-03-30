@@ -13,29 +13,20 @@
         }
 
         body {
-            margin: 0;
             background: linear-gradient(135deg, #000000, #1a001a, #2d0030);
             color: #f5f5f5;
-            text-align: center;
+            font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
             overflow-x: hidden;
-            font-family: 'Segoe UI', 'Arial', system-ui, sans-serif;
             min-height: 100vh;
         }
 
-        html {
-            scroll-behavior: smooth;
+        /* Hilangkan semua backdrop-filter dan efek berat */
+        .screen, .card, .zoom-modal, #typing, .modal-caption {
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
         }
 
-        p, h1, h2 {
-            text-shadow: 0 0 8px rgba(255, 200, 230, 0.5);
-            letter-spacing: 0.5px;
-        }
-
-        h1 {
-            color: #ffb3d9;
-            text-shadow: 0 0 12px #ff3388, 0 0 25px #ff4da6;
-        }
-
+        /* Layout Utama */
         .screen {
             position: fixed;
             width: 100%;
@@ -47,33 +38,17 @@
             align-items: center;
             flex-direction: column;
             z-index: 20;
-            transition: opacity 0.5s ease;
-        }
-
-        #startScreen {
+            transition: opacity 0.4s ease;
             background: radial-gradient(circle at center, #0a000f, #000000);
-            z-index: 25;
         }
-
-        #startScreen h2 {
-            font-size: 1.6rem;
-            margin-bottom: 25px;
-            color: #ffbfe6;
-            text-shadow: 0 0 10px #ff66b5;
-        }
-
+        #startScreen { z-index: 25; }
         #cinematic {
             background: radial-gradient(circle at center, #0a0015, #000000);
-            z-index: 20;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.8s ease;
+            transition: opacity 0.6s ease;
         }
-
-        #cinematic.active {
-            opacity: 1;
-            visibility: visible;
-        }
+        #cinematic.active { opacity: 1; visibility: visible; }
 
         .fadeText {
             opacity: 0;
@@ -81,9 +56,10 @@
             font-weight: bold;
             margin: 15px;
             color: #ffe0f0;
-            text-shadow: 0 0 10px #ff66b5;
-            transition: opacity 1.2s ease;
+            text-shadow: 0 0 8px #ff66b5;
+            transition: opacity 1s ease;
             max-width: 85%;
+            text-align: center;
         }
 
         button {
@@ -95,101 +71,95 @@
             font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 0 15px rgba(255, 77, 166, 0.8);
-            transition: transform 0.2s ease;
+            box-shadow: 0 0 12px rgba(255,77,166,0.6);
+            transition: transform 0.1s ease;
         }
-        
-        button:active {
-            transform: scale(0.97);
-        }
+        button:active { transform: scale(0.96); }
 
+        /* MAIN - SCROLL LANCAR */
         #main {
             display: none;
-            padding-bottom: 60px;
+            padding: 20px 12px 60px;
             position: relative;
             z-index: 5;
         }
 
         .cake {
-            font-size: 80px;
-            margin: 20px 0 10px;
-            animation: bounceCake 2s infinite ease;
+            font-size: 70px;
+            text-align: center;
+            margin: 15px 0 5px;
+            animation: bounceCake 2s infinite;
         }
-
         @keyframes bounceCake {
-            0%,100% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); }
+            0%,100%{ transform: translateY(0); }
+            50%{ transform: translateY(-10px); }
         }
 
         #typing {
-            font-size: 1rem;
-            background: rgba(0,0,0,0.6);
-            display: inline-block;
-            padding: 15px 20px;
+            font-size: 0.95rem;
+            background: rgba(0,0,0,0.5);
+            padding: 14px 18px;
             border-radius: 24px;
-            margin: 20px 15px;
-            max-width: 90%;
-            border: 1px solid rgba(255,128,191,0.4);
+            margin: 15px auto;
+            max-width: 94%;
+            border: 1px solid rgba(255,128,191,0.3);
             text-align: left;
             line-height: 1.5;
         }
 
+        /* GALERI - TANPA BLUR, TANPA ANIMASI BERAT */
         #gallery {
-            margin-top: 50px;
-            padding: 20px;
+            margin-top: 30px;
+            padding: 10px 5px;
         }
-
         #gallery h2 {
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-            color: #ffb3da;
+            font-size: 1.6rem;
+            text-align: center;
+            margin-bottom: 20px;
         }
-
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+            gap: 14px;
             max-width: 100%;
             margin: 0 auto;
         }
-
         .card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 10px;
-            transition: 0.2s ease;
-            opacity: 0;
-            transform: translateY(20px);
-            border: 1px solid rgba(255,200,230,0.2);
+            background: rgba(255,255,255,0.06);
+            border-radius: 18px;
+            padding: 8px;
             cursor: pointer;
+            transition: 0.1s linear;
+            border: 1px solid rgba(255,200,230,0.2);
         }
-
         .card:active {
-            transform: scale(0.98);
+            transform: scale(0.97);
+            background: rgba(255,255,255,0.12);
         }
-
         .card img {
             width: 100%;
-            border-radius: 16px;
+            border-radius: 14px;
             aspect-ratio: 1 / 1;
             object-fit: cover;
             background: #2a1a2a;
             display: block;
+            pointer-events: none;
         }
-
         .card p {
+            font-size: 0.7rem;
             margin-top: 8px;
-            font-size: 0.8rem;
-            font-weight: 500;
+            line-height: 1.3;
+            text-align: center;
         }
 
+        /* MODAL ZOOM (tetap ringan) */
         .zoom-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.95);
+            background: rgba(0,0,0,0.94);
             z-index: 1000;
             display: flex;
             justify-content: center;
@@ -198,39 +168,33 @@
             opacity: 0;
             transition: 0.2s;
         }
-
         .zoom-modal.active {
             visibility: visible;
             opacity: 1;
         }
-
         .modal-content {
-            max-width: 90vw;
+            max-width: 92vw;
             max-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            text-align: center;
         }
-
         .modal-content img {
-            max-width: 90vw;
-            max-height: 80vh;
+            max-width: 100%;
+            max-height: 75vh;
             border-radius: 20px;
-            object-fit: contain;
+            border: 2px solid rgba(255,128,191,0.5);
         }
-
         .modal-caption {
-            margin-top: 15px;
+            margin-top: 12px;
             color: #ffc0e0;
-            font-size: 0.9rem;
-            background: rgba(0,0,0,0.7);
-            padding: 6px 16px;
+            font-size: 0.85rem;
+            background: rgba(0,0,0,0.6);
+            padding: 6px 14px;
             border-radius: 30px;
+            display: inline-block;
         }
-
         .close-hint {
             position: absolute;
-            top: 20px;
+            top: 16px;
             right: 20px;
             color: white;
             font-size: 1.8rem;
@@ -242,43 +206,51 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            z-index: 1001;
         }
 
+        /* ENDING - tanpa efek transform berat */
         #ending {
-            margin-top: 80px;
-            padding: 40px 20px 80px;
+            margin-top: 50px;
+            padding: 30px 15px 60px;
         }
-
         .line {
             opacity: 0;
-            margin: 25px auto;
-            font-size: 1.1rem;
-            max-width: 85%;
-            transition: opacity 0.6s ease;
-            transform: translateY(15px);
+            margin: 22px auto;
+            font-size: 1rem;
+            max-width: 90%;
+            transition: opacity 0.5s ease;
+            transform: none;
             color: #ffe6f0;
+            text-align: center;
         }
-
         .final {
             opacity: 0;
-            margin-top: 40px;
-            font-size: 1.6rem;
+            margin-top: 35px;
+            font-size: 1.4rem;
             color: #ff99cc;
-            text-shadow: 0 0 12px #ff4d94;
-            transition: opacity 0.8s ease;
+            transition: opacity 0.6s ease;
+            text-align: center;
         }
 
-        #secret {
+        /* EFEK JATUH HATI (dibatasi) */
+        #hearts {
             position: fixed;
-            bottom: 20px;
-            right: 15px;
-            background: #ff1493;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            z-index: 200;
-            display: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .heart {
+            position: absolute;
+            font-size: 1rem;
+            animation: fallHeart linear forwards;
+        }
+        @keyframes fallHeart {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(110vh) rotate(300deg); opacity: 0; }
         }
 
         canvas#starsCanvas {
@@ -289,44 +261,32 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
-            opacity: 0.7;
+            opacity: 0.6;
         }
 
-        #hearts {
+        #secret {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 10;
+            bottom: 15px;
+            right: 12px;
+            background: #ff1493;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            z-index: 200;
+            display: none;
         }
-
-        .heart {
-            position: absolute;
-            font-size: 1.2rem;
-            animation: fallHeart linear forwards;
-        }
-
-        @keyframes fallHeart {
-            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-        }
-
         .credit {
-            margin-top: 20px;
-            font-size: 10px;
-            opacity: 0.4;
+            text-align: center;
+            font-size: 9px;
+            opacity: 0.5;
+            margin-top: 25px;
         }
-
-        @media (max-width: 640px) {
+        @media (max-width: 550px) {
+            .grid { gap: 10px; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
             .fadeText { font-size: 1.2rem; }
-            .cake { font-size: 65px; }
-            .line { font-size: 1rem; margin: 20px auto; }
-            .final { font-size: 1.4rem; }
-            #typing { font-size: 0.9rem; padding: 12px 16px; }
-            .grid { gap: 12px; }
-            .card p { font-size: 0.7rem; }
+            .cake { font-size: 60px; }
+            #typing { font-size: 0.85rem; padding: 12px; }
         }
     </style>
 </head>
@@ -347,77 +307,17 @@
 </div>
 
 <div id="main">
-    <audio id="bgMusic" loop preload="auto">
+    <audio id="bgMusic" loop preload="none">
         <source src="lagu.mp3" type="audio/mpeg">
     </audio>
-
     <div class="cake">🎂💖</div>
-    <h1 id="secretTrigger">Happy Birthday Sayangkuu 💕</h1>
+    <h1 id="secretTrigger" style="font-size:1.6rem;">Happy Birthday Sayangkuu 💕</h1>
     <p id="typing"></p>
 
     <div id="gallery">
         <h2>📸 our memories 🤍</h2>
-        <div class="grid">
-            <div class="card" data-caption="foto masa masa kita masi jadi temen 🥺✨">
-                <img src="foto pertama masi temen.jpg" alt="Kenangan 1" onerror="this.src='https://placehold.co/300x300/ff99cc/ffffff?text=❤️'">
-                <p>foto masa masa kita masi jadi temen 🥺✨</p>
-            </div>
-            <div class="card" data-caption="ini foto yang difotoin sama canez pas banget 5 hari setelah kita jadian hihii 💖">
-                <img src="foto 5 hari abis jadian.jpg" alt="Kenangan 2" onerror="this.src='https://placehold.co/300x300/ffb3d9/660033?text=💖'">
-                <p>ini foto yang difotoin sama canez pas banget 5 hari setelah kita jadian hihii 💖</p>
-            </div>
-            <div class="card" data-caption="kapan ya kita bisa jalan lagi sambil bercanda kaya gini 😭💕">
-                <img src="foto jalan ke ggp.jpg" alt="Kenangan 3" onerror="this.src='https://placehold.co/300x300/ff80bf/33001a?text=😭'">
-                <p>kapan ya kita bisa jalan lagi sambil bercanda kaya ginii 😭💕</p>
-            </div>
-            <div class="card" data-caption="ini momen pas kamu minta aku buat nyamperin kamu pas kamu lagi kerkom informatika ❤️">
-                <img src="foto tugas kerkom.jpg" alt="Kenangan 4" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
-                <p>ini momen pas kamu minta aku buat nyamperin kamu pas kamu lagi kerkom informatika ❤️</p>
-            </div>
-            <div class="card" data-caption="hari sumpah pemuda dimana hari itu pas banget 8 hari setelah kita jadiann 😆">
-                <img src="foto hari batik.jpg" alt="Kenangan 5" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
-                <p>hari sumpah pemuda dimana hari itu pas banget 8 hari setelah kita jadiann 😆</p>
-            </div>
-            <div class="card" data-caption="tepat 5 november 2025 kamu ngerayain ulang tahun akuu, dan itu menjadi hari yang paling berharga buat akuu 🥺💌">
-                <img src="foto ultah.jpg" alt="Kenangan 6" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
-                <p>tepat 5 november 2025 kamu ngerayain ulang tahun akuu, dan itu menjadi hari yang paling berharga buat akuu 🥺💌</p>
-            </div>
-            <div class="card" data-caption="foto dimana kamu pertama kali aku ajak ke perpusnas buat nemenin aku balikin bukuu 🥰">
-                <img src="foto jalan.jpg" alt="Kenangan 7" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
-                <p>foto dimana kamu pertama kali aku ajak ke perpusnas buat nemenin aku balikin bukuu 🥰</p>
-            </div>
-            <div class="card" data-caption="ini juga masi di perpusnas wkwkwk ( itu yang dibelakang ngepain yakk 😂 )">
-                <img src="foto perpusnas.jpg" alt="Kenangan 8" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
-                <p>ini juga masi di perpusnas wkwkwk ( itu yang dibelakang ngepain yakk 😂 )</p>
-            </div>
-            <div class="card" data-caption="klo ini foto pas kamu abis tampil di hari guruu ( padahal awal nya bilang nya bukan tampil tapi jadi tim perkap 🤪)">
-                <img src="foto rina tampil.jpg" alt="Kenangan 9" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
-                <p>klo ini foto pas kamu abis tampil di hari guruu ( padahal awal nya bilang nya bukan tampil tapi jadi tim perkap 🤪)</p>
-            </div>
-            <div class="card" data-caption="nah klo ini mah hati hati ada anomalii wkwkwk😵">
-                <img src="foto anomali.jpg" alt="Kenangan 10" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
-                <p>nah klo ini mah hati hati ada anomalii wkwkwk😵</p>
-            </div>
-            <div class="card" data-caption="klo yang ini gatau kenapa dehh yaa awkkwowko🤣🥲">
-                <img src="foto gatau.jpg" alt="Kenangan 11" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
-                <p>klo yang ini gatau kenapa dehh yaa awkkwowko🤣🥲</p>
-            </div>
-            <div class="card" data-caption="emm kayanya ini udah ngantuk bangett yaa ehehehe 😴😪">
-                <img src="foto bobo.png" alt="Kenangan 12" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
-                <p>emm kayanya ini udah ngantuk bangett yaa ehehehe 😴😪</p>
-            </div>
-            <div class="card" data-caption="nahini ada oraang cantik bangeett tiba tiba muncul di galeri hp akuu 😘">
-                <img src="foto rina.jpg" alt="Kenangan 13" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
-                <p>nahini ada oraang cantik bangeett tiba tiba muncul di galeri hp akuu 😘</p>
-            </div>
-            <div class="card" data-caption="nahh, klo yang ini tu muncul nya di laptop akuu ihihii, dan juga samaa orang nya cantik jugaaa😍">
-                <img src="foto rina cantik.jpg" alt="Kenangan 14" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
-                <p>nahh, klo yang ini tu muncul nya di laptop akuu ihihii, dan juga samaa orang nya cantik jugaaa😍</p>
-            </div>
-            <div class="card" data-caption="ini foto terakhir yang bakal muncul di memories ini, dimanaa ini adalah foto photobooth pertama kali kitaa dan juga menjadi foto pertama aku di photobooth karna sebelumnya aku gapernah punya rasa tertarik sama yang namanya photobooth ❤️🤨">
-                <img src="foto photobooth.jpg" alt="Kenangan 15" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
-                <p>ini foto terakhir yang bakal muncul di memories ini, dimanaa ini adalah foto photobooth pertama kali kitaa dan juga menjadi foto pertama aku di photobooth ❤️🤨</p>
-            </div>
+        <div class="grid" id="galleryGrid">
+            <!-- 15 foto akan di inject via JS biar lebih ringan pas load -->
         </div>
     </div>
 
@@ -445,6 +345,45 @@
 
 <script>
     (function(){
+        // ----- DATA FOTO (biar html lebih bersih dan ringan) -----
+        const fotoData = [
+            { src: "foto pertama masi temen.jpg", caption: "foto masa masa kita masi jadi temen 🥺✨", text: "foto masa masa kita masi jadi temen 🥺✨" },
+            { src: "foto 5 hari abis jadian.jpg", caption: "ini foto yang difotoin sama canez pas banget 5 hari setelah kita jadian hihii 💖", text: "ini foto yang difotoin sama canez pas banget 5 hari setelah kita jadian hihii 💖" },
+            { src: "foto jalan ke ggp.jpg", caption: "kapan ya kita bisa jalan lagi sambil bercanda kaya gini 😭💕", text: "kapan ya kita bisa jalan lagi sambil bercanda kaya ginii 😭💕" },
+            { src: "foto tugas kerkom.jpg", caption: "ini momen pas kamu minta aku buat nyamperin kamu pas kamu lagi kerkom informatika ❤️", text: "ini momen pas kamu minta aku buat nyamperin kamu pas kamu lagi kerkom informatika ❤️" },
+            { src: "foto hari batik.jpg", caption: "hari sumpah pemuda dimana hari itu pas banget 8 hari setelah kita jadiann 😆", text: "hari sumpah pemuda dimana hari itu pas banget 8 hari setelah kita jadiann 😆" },
+            { src: "foto ultah.jpg", caption: "tepat 5 november 2025 kamu ngerayain ulang tahun akuu, dan itu menjadi hari yang paling berharga buat akuu 🥺💌", text: "tepat 5 november 2025 kamu ngerayain ulang tahun akuu, dan itu menjadi hari yang paling berharga buat akuu 🥺💌" },
+            { src: "foto jalan.jpg", caption: "foto dimana kamu pertama kali aku ajak ke perpusnas buat nemenin aku balikin bukuu 🥰", text: "foto dimana kamu pertama kali aku ajak ke perpusnas buat nemenin aku balikin bukuu 🥰" },
+            { src: "foto perpusnas.jpg", caption: "ini juga masi di perpusnas wkwkwk ( itu yang dibelakang ngepain yakk 😂 )", text: "ini juga masi di perpusnas wkwkwk ( itu yang dibelakang ngepain yakk 😂 )" },
+            { src: "foto rina tampil.jpg", caption: "klo ini foto pas kamu abis tampil di hari guruu ( padahal awal nya bilang nya bukan tampil tapi jadi tim perkap 🤪)", text: "klo ini foto pas kamu abis tampil di hari guruu ( padahal awal nya bilang nya bukan tampil tapi jadi tim perkap 🤪)" },
+            { src: "foto anomali.jpg", caption: "nah klo ini mah hati hati ada anomalii wkwkwk😵", text: "nah klo ini mah hati hati ada anomalii wkwkwk😵" },
+            { src: "foto gatau.jpg", caption: "klo yang ini gatau kenapa dehh yaa awkkwowko🤣🥲", text: "klo yang ini gatau kenapa dehh yaa awkkwowko🤣🥲" },
+            { src: "foto bobo.png", caption: "emm kayanya ini udah ngantuk bangett yaa ehehehe 😴😪", text: "emm kayanya ini udah ngantuk bangett yaa ehehehe 😴😪" },
+            { src: "foto rina.jpg", caption: "nahini ada oraang cantik bangeett tiba tiba muncul di galeri hp akuu 😘", text: "nahini ada oraang cantik bangeett tiba tiba muncul di galeri hp akuu 😘" },
+            { src: "foto rina cantik.jpg", caption: "nahh, klo yang ini tu muncul nya di laptop akuu ihihii, dan juga samaa orang nya cantik jugaaa😍", text: "nahh, klo yang ini tu muncul nya di laptop akuu ihihii, dan juga samaa orang nya cantik jugaaa😍" },
+            { src: "foto photobooth.jpg", caption: "ini foto terakhir yang bakal muncul di memories ini, dimanaa ini adalah foto photobooth pertama kali kitaa dan juga menjadi foto pertama aku di photobooth ❤️🤨", text: "ini foto terakhir yang bakal muncul di memories ini, dimanaa ini adalah foto photobooth pertama kali kitaa dan juga menjadi foto pertama aku di photobooth ❤️🤨" }
+        ];
+
+        // Render galeri via JS biar HTML lebih ringan
+        const gridContainer = document.getElementById('galleryGrid');
+        if(gridContainer) {
+            fotoData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.setAttribute('data-caption', item.caption);
+                const img = document.createElement('img');
+                img.src = item.src;
+                img.alt = item.text;
+                img.onerror = function() { this.src = 'https://placehold.co/300x300/ff99cc/ffffff?text=❤️'; };
+                const p = document.createElement('p');
+                p.innerText = item.text;
+                card.appendChild(img);
+                card.appendChild(p);
+                gridContainer.appendChild(card);
+            });
+        }
+
+        // ----- ELEMENTS -----
         const startScreenDiv = document.getElementById('startScreen');
         const cinematicDiv = document.getElementById('cinematic');
         const mainDiv = document.getElementById('main');
@@ -452,17 +391,16 @@
         const secretBox = document.getElementById('secret');
         const secretTrigger = document.getElementById('secretTrigger');
         const startButton = document.getElementById('btnStartNow');
-        
         const zoomModal = document.getElementById('zoomModal');
         const modalImage = document.getElementById('modalImage');
         const modalCaption = document.getElementById('modalCaption');
         const closeModalBtn = document.getElementById('closeModalBtn');
-        
+
         const c1 = document.getElementById('c1');
         const c2 = document.getElementById('c2');
         const c3 = document.getElementById('c3');
         
-        // ==================== TYPING EFFECT ====================
+        // TYPING EFFECT
         const fullText = "ihihihii cieee, sekarang ada yang makin tuwaa 💖\n\nAkhirnya sekarang umur kamu udah sama kaya akuu.. 61 tahuun ehehe 🤭\n\nPertama-tamaa, aku mau minta maaf duluu yaa sayangku.. Karena aku gabisa ada disamping kamu disaat ulang tahun kamuu 🥺\nAku tau pasti kamu sedihh, dan jujur aku juga ngerasaa sedihh\nTapi ywdaa aku bikin ini khusus buat kamuu, biar sedikit bisa ngurangin rasa sedih kamu hari ini dan bisa bikin kamu seneeeng 🤍\n\nWalaupun sekarang aku gabisa ada disamping kamuu, semoga kamu tetep bisa ngerasain seberapa spesial nya hari ini yaa\n\nSekali lagii happy birthdayy yaa sayaangkuu 🎂✨\nSemoga semua yang kamu harapin bisa terwujudd dan semua hal baik dateng terus buat kamuu, dan doain ajaa yaa semogaa nanti diulang tahun kamu yang selanjutnyaa kita bisa ngerayain bareng barengg yaaa 💫\n\nFrom: Pacar kamu yang palingg nyebeeliiinnn 😜\nNote: Dibawah aku nyantumin beberapa foto foto kita berduaa, ini jawaban klo kamu suka nanyaa kenapa aku suka nyimpen foto-foto kamuu ato kita berduaa\nKarna aku mau foto-foto kita bisa menjadi kenangan yang selalu bisa kita inget teruss dan bisa kita liat teruuss ihihihii 😝";
         let typingIndex = 0;
         const typingEl = document.getElementById('typing');
@@ -470,297 +408,147 @@
         function typeWriter() {
             if(typingIndex < fullText.length) {
                 let char = fullText.charAt(typingIndex);
-                if (char === '\n') {
-                    typingEl.innerHTML += '<br>';
-                } else {
-                    typingEl.innerHTML += char;
-                }
+                if (char === '\n') typingEl.innerHTML += '<br>';
+                else typingEl.innerHTML += char;
                 typingIndex++;
-                setTimeout(typeWriter, 90);
+                setTimeout(typeWriter, 80);
             }
         }
         
-        // ==================== HEART RAIN (Dibatasi) ====================
-        let heartInterval = null;
+        // HATI JATUH (dibatasi)
         let activeHearts = 0;
-        const MAX_HEARTS = 25;
-        
-        function startHeartRain() {
-            if(heartInterval) clearInterval(heartInterval);
-            heartInterval = setInterval(() => {
-                if(mainDiv && mainDiv.style.display === "block" && activeHearts < MAX_HEARTS) {
-                    createHeart();
-                }
-            }, 350);
-        }
-        
+        let heartInterval = null;
         function createHeart() {
+            if(activeHearts > 22) return;
             activeHearts++;
             const heartDiv = document.createElement('div');
-            heartDiv.classList.add('heart');
-            const loveIcons = ['💖', '❤️', '💕', '💗', '🌸', '✨', '💘', '🌹'];
-            heartDiv.innerHTML = loveIcons[Math.floor(Math.random() * loveIcons.length)];
-            const size = Math.random() * 16 + 14;
-            heartDiv.style.fontSize = size + 'px';
+            heartDiv.className = 'heart';
+            heartDiv.innerHTML = ['💖','❤️','💕','💗','🌸','✨','💘'][Math.floor(Math.random()*7)];
             heartDiv.style.left = Math.random() * 100 + '%';
-            heartDiv.style.animationDuration = (Math.random() * 3 + 2.5) + 's';
-            heartDiv.style.opacity = Math.random() * 0.6 + 0.3;
+            heartDiv.style.animationDuration = (Math.random() * 2 + 2.5) + 's';
+            heartDiv.style.fontSize = (Math.random() * 12 + 12) + 'px';
             document.getElementById('hearts').appendChild(heartDiv);
-            
-            heartDiv.addEventListener('animationend', () => {
-                heartDiv.remove();
-                activeHearts--;
-            });
-            setTimeout(() => {
-                if(heartDiv.parentNode) {
-                    heartDiv.remove();
-                    activeHearts--;
-                }
-            }, 5500);
+            heartDiv.addEventListener('animationend', () => { heartDiv.remove(); activeHearts--; });
+            setTimeout(() => { if(heartDiv.parentNode) { heartDiv.remove(); activeHearts--; } }, 5000);
+        }
+        function startHeartRain() {
+            if(heartInterval) clearInterval(heartInterval);
+            heartInterval = setInterval(() => { if(mainDiv.style.display === 'block') createHeart(); }, 500);
         }
         
-        // ==================== MUSIK ====================
-        function startMusicWithCinematic() {
-            if(music) {
-                music.currentTime = 0;
-                music.play().catch(() => {});
-                music.volume = 0.4;
-            }
-        }
+        // MUSIK
+        function startMusic() { if(music) { music.volume = 0.3; music.play().catch(()=>{}); } }
         
-        // ==================== CINEMATIC & START ====================
+        // CINEMATIC
         function showCinematicAndContinue() {
             cinematicDiv.classList.add('active');
-            startMusicWithCinematic();
-            
+            startMusic();
             if(c1) c1.style.opacity = "0";
             if(c2) c2.style.opacity = "0";
             if(c3) c3.style.opacity = "0";
-            
             setTimeout(() => { if(c1) c1.style.opacity = "1"; }, 500);
             setTimeout(() => { if(c2) c2.style.opacity = "1"; }, 2500);
             setTimeout(() => { if(c3) c3.style.opacity = "1"; }, 4500);
-            
             setTimeout(() => {
                 cinematicDiv.classList.remove('active');
-                cinematicDiv.style.visibility = "hidden";
-                cinematicDiv.style.opacity = "0";
-                mainDiv.style.display = "block";
-                
+                cinematicDiv.style.display = 'none';
+                mainDiv.style.display = 'block';
                 typingEl.innerHTML = "";
                 typingIndex = 0;
                 typeWriter();
                 startHeartRain();
                 setTimeout(() => {
-                    revealCardsOnScroll();
-                    checkEndingWithSlowReveal();
-                }, 300);
+                    document.querySelectorAll('.card').forEach(c => { c.style.opacity = '1'; c.style.transform = 'none'; });
+                    checkEnding();
+                }, 200);
             }, 6800);
         }
         
-        function onStartClick() {
+        function onStart() {
             startScreenDiv.style.opacity = "0";
-            setTimeout(() => {
-                startScreenDiv.style.display = "none";
-            }, 500);
+            setTimeout(() => startScreenDiv.style.display = "none", 400);
             showCinematicAndContinue();
         }
+        startButton.addEventListener('click', onStart);
         
-        if(startButton) {
-            startButton.addEventListener('click', onStartClick);
+        // ZOOM
+        function attachZoom() {
+            document.querySelectorAll('.card').forEach(card => {
+                const imgEl = card.querySelector('img');
+                const cap = card.getAttribute('data-caption') || '';
+                card.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if(imgEl && imgEl.src) {
+                        modalImage.src = imgEl.src;
+                        modalCaption.innerText = cap;
+                        zoomModal.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            });
         }
-        
-        // ==================== ZOOM MODAL ====================
-        const cards = document.querySelectorAll('.card');
-        
-        function openZoom(imgSrc, captionText) {
-            modalImage.src = imgSrc;
-            modalCaption.innerText = captionText;
-            zoomModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function closeZoom() {
+        function closeZoomFn() {
             zoomModal.classList.remove('active');
             document.body.style.overflow = '';
-            setTimeout(() => {
-                if(!zoomModal.classList.contains('active')) {
-                    modalImage.src = '';
-                }
-            }, 200);
         }
+        closeModalBtn.addEventListener('click', closeZoomFn);
+        zoomModal.addEventListener('click', (e) => { if(e.target === zoomModal) closeZoomFn(); });
         
-        cards.forEach(card => {
-            const imgElement = card.querySelector('img');
-            const caption = card.getAttribute('data-caption') || card.querySelector('p')?.innerText || 'Kenangan Indah 💖';
-            card.addEventListener('click', (e) => {
-                e.stopPropagation();
-                if(imgElement && imgElement.src) {
-                    openZoom(imgElement.src, caption);
-                }
-            });
-        });
-        
-        if(closeModalBtn) closeModalBtn.addEventListener('click', closeZoom);
-        zoomModal.addEventListener('click', (e) => {
-            if(e.target === zoomModal) closeZoom();
-        });
-        
-        // ==================== BINTANG (Dikurangi jumlahnya) ====================
-        const starCanvas = document.getElementById('starsCanvas');
-        let starCtx = starCanvas.getContext('2d');
-        let starArray = [];
-        let width, height;
-        let starAnimationId = null;
-        
-        function resizeStars() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            starCanvas.width = width;
-            starCanvas.height = height;
-            initStars();
-        }
-        
-        function initStars() {
-            starArray = [];
-            const starCount = Math.min(80, Math.floor(width * height / 8000));
-            for(let i=0; i<starCount; i++) {
-                starArray.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    radius: Math.random() * 1.8 + 0.8,
-                    alpha: Math.random() * 0.5 + 0.3
-                });
-            }
-        }
-        
-        function drawStars() {
-            if(!starCtx) return;
-            starCtx.clearRect(0, 0, width, height);
-            for(let s of starArray) {
-                starCtx.globalAlpha = s.alpha;
-                starCtx.fillStyle = 'white';
-                starCtx.beginPath();
-                starCtx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-                starCtx.fill();
-            }
-            starCtx.globalAlpha = 1;
-            starAnimationId = requestAnimationFrame(drawStars);
-        }
-        
-        window.addEventListener('resize', () => resizeStars());
-        resizeStars();
-        drawStars();
-        
-        // ==================== SCROLL REVEAL ====================
-        function revealCardsOnScroll() {
-            const cardsAll = document.querySelectorAll('.card');
-            cardsAll.forEach(card => {
-                const rect = card.getBoundingClientRect();
-                if(rect.top < window.innerHeight - 80) {
-                    card.style.opacity = "1";
-                    card.style.transform = "translateY(0px)";
-                }
-            });
-        }
-        
-        const cardObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    entry.target.style.opacity = "1";
-                    entry.target.style.transform = "translateY(0px)";
-                    cardObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.2 });
-        
-        document.querySelectorAll('.card').forEach(card => cardObserver.observe(card));
-        window.addEventListener('scroll', revealCardsOnScroll);
-        
-        // ==================== ENDING (Lebih Lambat) ====================
-        let endingRevealed = false;
-        let endingAnimationStarted = false;
-        
-        function revealEndingLinesSlowly() {
-            if(endingAnimationStarted) return;
-            endingAnimationStarted = true;
-            
+        // ENDING SCROLL (pelan & ringan)
+        let endingStarted = false;
+        function revealEnding() {
+            if(endingStarted) return;
+            endingStarted = true;
             const lines = document.querySelectorAll('#ending .line');
-            const finalText = document.querySelector('#ending .final');
-            
-            lines.forEach((line, idx) => {
-                setTimeout(() => {
-                    line.style.opacity = "1";
-                    line.style.transform = "translateY(0px)";
-                }, idx * 1000);
+            const finalEl = document.querySelector('#ending .final');
+            lines.forEach((line, i) => {
+                setTimeout(() => { line.style.opacity = '1'; }, i * 850);
             });
-            
-            const lastDelay = lines.length * 1000;
-            setTimeout(() => {
-                if(finalText) {
-                    finalText.style.opacity = "1";
-                    finalText.style.transform = "scale(1)";
-                }
-            }, lastDelay + 600);
+            setTimeout(() => { if(finalEl) finalEl.style.opacity = '1'; }, lines.length * 850 + 500);
         }
-        
-        function checkEndingWithSlowReveal() {
-            if(endingRevealed) return;
-            const endingSection = document.getElementById('ending');
-            if(!endingSection) return;
-            const rect = endingSection.getBoundingClientRect();
-            if(rect.top < window.innerHeight - 100) {
-                endingRevealed = true;
-                revealEndingLinesSlowly();
-            }
+        function checkEnding() {
+            const endingDiv = document.getElementById('ending');
+            if(!endingDiv) return;
+            const rect = endingDiv.getBoundingClientRect();
+            if(rect.top < window.innerHeight - 80 && !endingStarted) revealEnding();
         }
+        window.addEventListener('scroll', checkEnding);
         
-        window.addEventListener('scroll', () => checkEndingWithSlowReveal());
-        
-        const endingObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting && !endingRevealed) {
-                    endingRevealed = true;
-                    revealEndingLinesSlowly();
-                    endingObserver.disconnect();
-                }
-            });
-        }, { threshold: 0.25 });
-        
-        const endingElement = document.getElementById('ending');
-        if(endingElement) endingObserver.observe(endingElement);
-        
-        // ==================== SECRET MESSAGE ====================
-        if(secretTrigger) {
-            secretTrigger.style.cursor = "pointer";
-            secretTrigger.addEventListener('click', () => {
-                if(secretBox) {
-                    secretBox.style.display = "block";
-                    setTimeout(() => {
-                        secretBox.style.opacity = "0";
-                        setTimeout(() => {
-                            secretBox.style.display = "none";
-                            secretBox.style.opacity = "1";
-                        }, 500);
-                    }, 3800);
-                }
-            });
+        // BINTANG (ringan)
+        const canvas = document.getElementById('starsCanvas');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+        function resizeStars() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            stars = [];
+            for(let i=0;i<70;i++) stars.push({ x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*1.5+0.5 });
+            drawStars();
         }
+        function drawStars() {
+            if(!ctx) return;
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            ctx.fillStyle = 'white';
+            stars.forEach(s => { ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill(); });
+            requestAnimationFrame(drawStars);
+        }
+        window.addEventListener('resize', resizeStars);
+        resizeStars();
         
-        // ==================== FALLBACK GAMBAR ====================
-        const allImgs = document.querySelectorAll('.card img');
-        allImgs.forEach(img => {
-            img.addEventListener('error', function() {
-                if(!this.dataset.fallback) {
-                    this.dataset.fallback = "true";
-                    this.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ff99cc'/%3E%3Ctext x='50' y='55' font-size='14' text-anchor='middle' fill='white'%3E❤️%3C/text%3E%3C/svg%3E";
-                }
-            });
+        // SECRET
+        secretTrigger.addEventListener('click', () => {
+            secretBox.style.display = 'block';
+            setTimeout(() => { secretBox.style.opacity = '0'; setTimeout(() => { secretBox.style.display = 'none'; secretBox.style.opacity = '1'; },400); }, 3500);
         });
         
-        if(music) music.addEventListener('error', () => console.log("lagu.mp3 tidak ada"));
-        
-        mainDiv.style.display = "none";
+        // fallback gambar
+        setTimeout(() => {
+            attachZoom();
+            document.querySelectorAll('.card img').forEach(img => {
+                img.addEventListener('error', function() { if(!this.src.includes('placehold')) this.src = 'https://placehold.co/300x300/ff99cc/ffffff?text=❤️'; });
+            });
+        }, 100);
+        mainDiv.style.display = 'none';
     })();
 </script>
 </body>
