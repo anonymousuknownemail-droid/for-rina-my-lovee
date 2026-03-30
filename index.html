@@ -2,14 +2,14 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>For You Rinaa ❤️</title>
     <style>
-        /* (style-nya sama persis seperti punya kamu, tidak berubah) */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -18,7 +18,7 @@
             color: #f5f5f5;
             text-align: center;
             overflow-x: hidden;
-            font-family: 'Segoe UI', 'Arial', sans-serif;
+            font-family: 'Segoe UI', 'Arial', system-ui, sans-serif;
             min-height: 100vh;
         }
 
@@ -47,7 +47,7 @@
             align-items: center;
             flex-direction: column;
             z-index: 20;
-            transition: opacity 0.8s ease;
+            transition: opacity 0.5s ease;
         }
 
         #startScreen {
@@ -67,131 +67,120 @@
             z-index: 20;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.9s ease, visibility 0s linear 0.9s;
+            transition: opacity 0.8s ease;
         }
 
         #cinematic.active {
             opacity: 1;
             visibility: visible;
-            transition: opacity 0.9s ease, visibility 0s linear 0s;
         }
 
         .fadeText {
             opacity: 0;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: bold;
-            margin: 20px;
+            margin: 15px;
             color: #ffe0f0;
-            text-shadow: 0 0 15px #ff66b5;
-            transition: opacity 1.6s ease;
+            text-shadow: 0 0 10px #ff66b5;
+            transition: opacity 1.2s ease;
             max-width: 85%;
         }
 
         button {
-            padding: 14px 38px;
+            padding: 12px 32px;
             border-radius: 50px;
             border: none;
             background: linear-gradient(135deg, #ff2b85, #ff80bf);
             color: white;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(255, 77, 166, 0.9);
-            transition: all 0.25s ease;
-            font-family: inherit;
+            box-shadow: 0 0 15px rgba(255, 77, 166, 0.8);
+            transition: transform 0.2s ease;
         }
-
-        button:hover {
-            transform: scale(1.08);
-            box-shadow: 0 0 30px #ff4da6;
+        
+        button:active {
+            transform: scale(0.97);
         }
 
         #main {
             display: none;
-            padding-bottom: 80px;
+            padding-bottom: 60px;
             position: relative;
             z-index: 5;
-            background: linear-gradient(135deg, #000000, #1a001a);
         }
 
         .cake {
-            font-size: 100px;
-            margin: 30px 0 10px;
-            animation: bounceCake 2.5s infinite ease;
-            filter: drop-shadow(0 0 12px #ff99cc);
+            font-size: 80px;
+            margin: 20px 0 10px;
+            animation: bounceCake 2s infinite ease;
         }
 
         @keyframes bounceCake {
             0%,100% { transform: translateY(0px); }
-            50% { transform: translateY(-18px); }
+            50% { transform: translateY(-12px); }
         }
 
         #typing {
-            font-size: 1.3rem;
-            background: rgba(0,0,0,0.5);
+            font-size: 1rem;
+            background: rgba(0,0,0,0.6);
             display: inline-block;
-            padding: 18px 28px;
-            border-radius: 30px;
-            backdrop-filter: blur(6px);
-            margin: 20px auto;
+            padding: 15px 20px;
+            border-radius: 24px;
+            margin: 20px 15px;
             max-width: 90%;
-            border: 1px solid rgba(255,128,191,0.3);
+            border: 1px solid rgba(255,128,191,0.4);
             text-align: left;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         #gallery {
-            margin-top: 70px;
-            padding: 40px 20px;
+            margin-top: 50px;
+            padding: 20px;
         }
 
         #gallery h2 {
-            font-size: 2rem;
-            margin-bottom: 40px;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
             color: #ffb3da;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 30px;
-            max-width: 1100px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            max-width: 100%;
             margin: 0 auto;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 30px;
-            padding: 15px 12px 20px;
-            backdrop-filter: blur(12px);
-            transition: 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 10px;
+            transition: 0.2s ease;
             opacity: 0;
-            transform: translateY(50px);
-            border: 1px solid rgba(255,200,230,0.3);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            transform: translateY(20px);
+            border: 1px solid rgba(255,200,230,0.2);
             cursor: pointer;
         }
 
-        .card:hover {
-            transform: scale(1.03) translateY(-8px);
-            background: rgba(255, 255, 255, 0.2);
-            border-color: #ff99cc;
+        .card:active {
+            transform: scale(0.98);
         }
 
         .card img {
             width: 100%;
-            border-radius: 20px;
+            border-radius: 16px;
             aspect-ratio: 1 / 1;
             object-fit: cover;
             background: #2a1a2a;
-            box-shadow: 0 5px 12px rgba(0,0,0,0.3);
-            pointer-events: none;
+            display: block;
         }
 
         .card p {
-            margin-top: 14px;
+            margin-top: 8px;
+            font-size: 0.8rem;
             font-weight: 500;
-            font-size: 0.95rem;
         }
 
         .zoom-modal {
@@ -200,16 +189,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(15px);
+            background: rgba(0,0,0,0.95);
             z-index: 1000;
             display: flex;
             justify-content: center;
             align-items: center;
             visibility: hidden;
             opacity: 0;
-            transition: visibility 0.2s, opacity 0.3s ease;
-            cursor: pointer;
+            transition: 0.2s;
         }
 
         .zoom-modal.active {
@@ -220,116 +207,78 @@
         .modal-content {
             max-width: 90vw;
             max-height: 90vh;
-            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
-            animation: zoomInScale 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.2);
-        }
-
-        @keyframes zoomInScale {
-            from {
-                transform: scale(0.85);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
         }
 
         .modal-content img {
-            max-width: 100%;
+            max-width: 90vw;
             max-height: 80vh;
-            border-radius: 28px;
-            box-shadow: 0 0 40px rgba(255, 77, 166, 0.6);
-            border: 3px solid rgba(255, 128, 191, 0.6);
+            border-radius: 20px;
             object-fit: contain;
         }
 
         .modal-caption {
-            margin-top: 20px;
+            margin-top: 15px;
             color: #ffc0e0;
-            font-size: 1.2rem;
-            background: rgba(0,0,0,0.6);
-            padding: 8px 24px;
-            border-radius: 40px;
-            backdrop-filter: blur(4px);
-            font-weight: 500;
+            font-size: 0.9rem;
+            background: rgba(0,0,0,0.7);
+            padding: 6px 16px;
+            border-radius: 30px;
         }
 
         .close-hint {
             position: absolute;
-            top: 25px;
-            right: 30px;
+            top: 20px;
+            right: 20px;
             color: white;
-            font-size: 2rem;
-            font-weight: bold;
+            font-size: 1.8rem;
             background: rgba(0,0,0,0.5);
-            width: 48px;
-            height: 48px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: 0.2s;
-            backdrop-filter: blur(8px);
-        }
-
-        .close-hint:hover {
-            background: #ff3388;
-            transform: scale(1.1);
         }
 
         #ending {
-            margin-top: 130px;
-            padding: 80px 25px 120px;
-            background: radial-gradient(ellipse at top, rgba(30,0,30,0.7), transparent);
+            margin-top: 80px;
+            padding: 40px 20px 80px;
         }
 
         .line {
             opacity: 0;
-            margin: 32px auto;
-            font-size: 1.35rem;
-            max-width: 700px;
-            font-weight: 500;
-            transition: opacity 0.9s ease, transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            transform: translateY(30px);
+            margin: 25px auto;
+            font-size: 1.1rem;
+            max-width: 85%;
+            transition: opacity 0.6s ease;
+            transform: translateY(15px);
             color: #ffe6f0;
         }
 
         .final {
             opacity: 0;
-            margin-top: 70px;
-            font-size: 2.3rem;
+            margin-top: 40px;
+            font-size: 1.6rem;
             color: #ff99cc;
-            text-shadow: 0 0 18px #ff4d94;
-            transition: opacity 1.5s ease, transform 0.9s ease;
-            transform: scale(0.96);
+            text-shadow: 0 0 12px #ff4d94;
+            transition: opacity 0.8s ease;
         }
 
         #secret {
             position: fixed;
-            bottom: 30px;
-            right: 20px;
-            background: #ff1493e6;
+            bottom: 20px;
+            right: 15px;
+            background: #ff1493;
             color: white;
-            padding: 14px 22px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1rem;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.8rem;
             z-index: 200;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
             display: none;
-            animation: slideIn 0.5s ease;
-            font-family: monospace;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(60px);}
-            to { opacity: 1; transform: translateX(0);}
         }
 
         canvas#starsCanvas {
@@ -340,6 +289,7 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
+            opacity: 0.7;
         }
 
         #hearts {
@@ -349,43 +299,34 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 15;
+            z-index: 10;
         }
 
         .heart {
             position: absolute;
-            font-size: 1.7rem;
-            user-select: none;
-            filter: drop-shadow(0 0 4px hotpink);
+            font-size: 1.2rem;
             animation: fallHeart linear forwards;
         }
 
         @keyframes fallHeart {
-            0% {
-                transform: translateY(-20vh) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(110vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .fadeText { font-size: 1.3rem; }
-            .line { font-size: 1.05rem; margin: 28px auto; }
-            .final { font-size: 1.8rem; }
-            .cake { font-size: 75px; }
-            #typing { font-size: 1rem; padding: 14px 20px; }
-            .grid { gap: 18px; }
-            .modal-caption { font-size: 0.9rem; }
-            .close-hint { width: 40px; height: 40px; font-size: 1.5rem; top: 15px; right: 15px; }
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
         .credit {
-            margin: 30px auto 10px;
-            font-size: 11px;
+            margin-top: 20px;
+            font-size: 10px;
             opacity: 0.4;
+        }
+
+        @media (max-width: 640px) {
+            .fadeText { font-size: 1.2rem; }
+            .cake { font-size: 65px; }
+            .line { font-size: 1rem; margin: 20px auto; }
+            .final { font-size: 1.4rem; }
+            #typing { font-size: 0.9rem; padding: 12px 16px; }
+            .grid { gap: 12px; }
+            .card p { font-size: 0.7rem; }
         }
     </style>
 </head>
@@ -418,63 +359,63 @@
         <h2>📸 our memories 🤍</h2>
         <div class="grid">
             <div class="card" data-caption="foto masa masa kita masi jadi temen 🥺✨">
-                <img src="foto pertama masi temen.jpg" alt="Kenangan 1" onerror="this.src='https://placehold.co/400x400/ff99cc/ffffff?text=❤️+Kenangan'">
+                <img src="foto pertama masi temen.jpg" alt="Kenangan 1" onerror="this.src='https://placehold.co/300x300/ff99cc/ffffff?text=❤️'">
                 <p>foto masa masa kita masi jadi temen 🥺✨</p>
             </div>
             <div class="card" data-caption="ini foto yang difotoin sama canez pas banget 5 hari setelah kita jadian hihii 💖">
-                <img src="foto 5 hari abis jadian.jpg" alt="Kenangan 2" onerror="this.src='https://placehold.co/400x400/ffb3d9/660033?text=💖+Momen+Manis'">
+                <img src="foto 5 hari abis jadian.jpg" alt="Kenangan 2" onerror="this.src='https://placehold.co/300x300/ffb3d9/660033?text=💖'">
                 <p>ini foto yang difotoin sama canez pas banget 5 hari setelah kita jadian hihii 💖</p>
             </div>
             <div class="card" data-caption="kapan ya kita bisa jalan lagi sambil bercanda kaya gini 😭💕">
-                <img src="foto jalan ke ggp.jpg" alt="Kenangan 3" onerror="this.src='https://placehold.co/400x400/ff80bf/33001a?text=😭+Tawa+Kita'">
+                <img src="foto jalan ke ggp.jpg" alt="Kenangan 3" onerror="this.src='https://placehold.co/300x300/ff80bf/33001a?text=😭'">
                 <p>kapan ya kita bisa jalan lagi sambil bercanda kaya ginii 😭💕</p>
             </div>
             <div class="card" data-caption="ini momen pas kamu minta aku buat nyamperin kamu pas kamu lagi kerkom informatika ❤️">
-                <img src="foto tugas kerkom.jpg" alt="Kenangan 4" onerror="this.src='https://placehold.co/400x400/ff66aa/1a000d?text=❤️+Alasan+Cinta'">
+                <img src="foto tugas kerkom.jpg" alt="Kenangan 4" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
                 <p>ini momen pas kamu minta aku buat nyamperin kamu pas kamu lagi kerkom informatika ❤️</p>
             </div>
             <div class="card" data-caption="hari sumpah pemuda dimana hari itu pas banget 8 hari setelah kita jadiann 😆">
-                <img src="foto hari batik.jpg" alt="Kenangan 5" onerror="this.src='https://placehold.co/400x400/ff66aa/1a000d?text=❤️+Alasan+Cinta'">
+                <img src="foto hari batik.jpg" alt="Kenangan 5" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
                 <p>hari sumpah pemuda dimana hari itu pas banget 8 hari setelah kita jadiann 😆</p>
             </div>
-            <div class="card" data-caption="tepat 5 november 2025 kamu ngerayain ulang tahun akuu, dan itu menjadi hari yang paing berharga buat akuu 🥺💌">
-                <img src="foto ultah.jpg" alt="Kenangan 6" onerror="this.src='https://placehold.co/400x400/ff66aa/1a000d?text=❤️+Alasan+Cinta'">
+            <div class="card" data-caption="tepat 5 november 2025 kamu ngerayain ulang tahun akuu, dan itu menjadi hari yang paling berharga buat akuu 🥺💌">
+                <img src="foto ultah.jpg" alt="Kenangan 6" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
                 <p>tepat 5 november 2025 kamu ngerayain ulang tahun akuu, dan itu menjadi hari yang paling berharga buat akuu 🥺💌</p>
             </div>
             <div class="card" data-caption="foto dimana kamu pertama kali aku ajak ke perpusnas buat nemenin aku balikin bukuu 🥰">
-                <img src="foto jalan.jpg" alt="Kenangan 7" onerror="this.src='https://placehold.co/400x400/ff66aa/1a000d?text=❤️+Alasan+Cinta'">
+                <img src="foto jalan.jpg" alt="Kenangan 7" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
                 <p>foto dimana kamu pertama kali aku ajak ke perpusnas buat nemenin aku balikin bukuu 🥰</p>
             </div>
             <div class="card" data-caption="ini juga masi di perpusnas wkwkwk ( itu yang dibelakang ngepain yakk 😂 )">
-                <img src="foto perpusnas.jpg" alt="Kenangan 8" onerror="this.src='https://placehold.co/400x400/ff66aa/1a000d?text=❤️+Alasan+Cinta'">
+                <img src="foto perpusnas.jpg" alt="Kenangan 8" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
                 <p>ini juga masi di perpusnas wkwkwk ( itu yang dibelakang ngepain yakk 😂 )</p>
             </div>
             <div class="card" data-caption="klo ini foto pas kamu abis tampil di hari guruu ( padahal awal nya bilang nya bukan tampil tapi jadi tim perkap 🤪)">
-                <img src="foto rina tampil.jpg" alt="Kenangan 9" onerror="this.src='https://placehold.co/400x400/ff66aa/1a000d?text=❤️+Alasan+Cinta'">
+                <img src="foto rina tampil.jpg" alt="Kenangan 9" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
                 <p>klo ini foto pas kamu abis tampil di hari guruu ( padahal awal nya bilang nya bukan tampil tapi jadi tim perkap 🤪)</p>
             </div>
             <div class="card" data-caption="nah klo ini mah hati hati ada anomalii wkwkwk😵">
-                <img src="foto anomali.jpg" alt="Kenangan 10" onerror="this.src='https://placehold.co/400x400/ff66aa/1a000d?text=❤️+Alasan+Cinta'">
+                <img src="foto anomali.jpg" alt="Kenangan 10" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
                 <p>nah klo ini mah hati hati ada anomalii wkwkwk😵</p>
             </div>
-             <div class="card" data-caption="klo yang ini gatau kenapa dehh yaa awkkwowko🤣🥲">
-                <img src="foto gatau.jpg" alt="Kenangan 11" onerror="this.src='https://placehold.co/400x400/ff66aa/1a000d?text=❤️+Alasan+Cinta'">
+            <div class="card" data-caption="klo yang ini gatau kenapa dehh yaa awkkwowko🤣🥲">
+                <img src="foto gatau.jpg" alt="Kenangan 11" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
                 <p>klo yang ini gatau kenapa dehh yaa awkkwowko🤣🥲</p>
             </div>
             <div class="card" data-caption="emm kayanya ini udah ngantuk bangett yaa ehehehe 😴😪">
-                <img src="foto bobo.png" alt="Kenangan 12" onerror="this.src='https://placehold.co/400x400/ff66aa/1a000d?text=❤️+Alasan+Cinta'">
+                <img src="foto bobo.png" alt="Kenangan 12" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
                 <p>emm kayanya ini udah ngantuk bangett yaa ehehehe 😴😪</p>
             </div>
             <div class="card" data-caption="nahini ada oraang cantik bangeett tiba tiba muncul di galeri hp akuu 😘">
-                <img src="foto rina.jpg" alt="Kenangan 13" onerror="this.src='https://placehold.co/400x400/ff66aa/1a000d?text=❤️+Alasan+Cinta'">
+                <img src="foto rina.jpg" alt="Kenangan 13" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
                 <p>nahini ada oraang cantik bangeett tiba tiba muncul di galeri hp akuu 😘</p>
             </div>
             <div class="card" data-caption="nahh, klo yang ini tu muncul nya di laptop akuu ihihii, dan juga samaa orang nya cantik jugaaa😍">
-                <img src="foto rina cantik.jpg" alt="Kenangan 14" onerror="this.src='https://placehold.co/400x400/ff66aa/1a000d?text=❤️+Alasan+Cinta'">
+                <img src="foto rina cantik.jpg" alt="Kenangan 14" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
                 <p>nahh, klo yang ini tu muncul nya di laptop akuu ihihii, dan juga samaa orang nya cantik jugaaa😍</p>
             </div>
             <div class="card" data-caption="ini foto terakhir yang bakal muncul di memories ini, dimanaa ini adalah foto photobooth pertama kali kitaa dan juga menjadi foto pertama aku di photobooth karna sebelumnya aku gapernah punya rasa tertarik sama yang namanya photobooth ❤️🤨">
-                <img src="foto photobooth.jpg" alt="Kenangan 15" onerror="this.src='https://placehold.co/400x400/ff66aa/1a000d?text=❤️+Alasan+Cinta'">
+                <img src="foto photobooth.jpg" alt="Kenangan 15" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
                 <p>ini foto terakhir yang bakal muncul di memories ini, dimanaa ini adalah foto photobooth pertama kali kitaa dan juga menjadi foto pertama aku di photobooth ❤️🤨</p>
             </div>
         </div>
@@ -482,7 +423,7 @@
 
     <div id="ending">
         <p class="line">🌸 terimakasi yaa sayangkuu kamu masi bisa bertahan sampai sekaraang 🌸</p>
-        <p class="line">terimaksi jugaa udah bisa hadir di hidup akuu, udah jadi tempat aku ceritaa, jadi tempat aku pulaang</p>
+        <p class="line">terimakasi jugaa udah bisa hadir di hidup akuu, udah jadi tempat aku ceritaa, jadi tempat aku pulaang</p>
         <p class="line">🏠 dan jadi orang yang selalu bikin hidup aku berwarnaa</p>
         <p class="line">semogaaa kita bisa bertahan terus yaa sampai selamaanyaa🏡</p>
         <p class="line">🌙 dan kita bisa ngehadapin masalah yang ada bersama samaaa</p>
@@ -521,7 +462,7 @@
         const c2 = document.getElementById('c2');
         const c3 = document.getElementById('c3');
         
-        // ==================== TYPING EFFECT YANG SUDAH DIPERBAIKI ====================
+        // ==================== TYPING EFFECT ====================
         const fullText = "ihihihii cieee, sekarang ada yang makin tuwaa 💖\n\nAkhirnya sekarang umur kamu udah sama kaya akuu.. 61 tahuun ehehe 🤭\n\nPertama-tamaa, aku mau minta maaf duluu yaa sayangku.. Karena aku gabisa ada disamping kamu disaat ulang tahun kamuu 🥺\nAku tau pasti kamu sedihh, dan jujur aku juga ngerasaa sedihh\nTapi ywdaa aku bikin ini khusus buat kamuu, biar sedikit bisa ngurangin rasa sedih kamu hari ini dan bisa bikin kamu seneeeng 🤍\n\nWalaupun sekarang aku gabisa ada disamping kamuu, semoga kamu tetep bisa ngerasain seberapa spesial nya hari ini yaa\n\nSekali lagii happy birthdayy yaa sayaangkuu 🎂✨\nSemoga semua yang kamu harapin bisa terwujudd dan semua hal baik dateng terus buat kamuu, dan doain ajaa yaa semogaa nanti diulang tahun kamu yang selanjutnyaa kita bisa ngerayain bareng barengg yaaa 💫\n\nFrom: Pacar kamu yang palingg nyebeeliiinnn 😜\nNote: Dibawah aku nyantumin beberapa foto foto kita berduaa, ini jawaban klo kamu suka nanyaa kenapa aku suka nyimpen foto-foto kamuu ato kita berduaa\nKarna aku mau foto-foto kita bisa menjadi kenangan yang selalu bisa kita inget teruss dan bisa kita liat teruuss ihihihii 😝";
         let typingIndex = 0;
         const typingEl = document.getElementById('typing');
@@ -538,45 +479,56 @@
                 setTimeout(typeWriter, 90);
             }
         }
-        // ========================================================================
         
+        // ==================== HEART RAIN (Dibatasi) ====================
         let heartInterval = null;
+        let activeHearts = 0;
+        const MAX_HEARTS = 25;
+        
         function startHeartRain() {
             if(heartInterval) clearInterval(heartInterval);
             heartInterval = setInterval(() => {
-                if(mainDiv && mainDiv.style.display === "block") {
+                if(mainDiv && mainDiv.style.display === "block" && activeHearts < MAX_HEARTS) {
                     createHeart();
                 }
-            }, 220);
+            }, 350);
         }
         
         function createHeart() {
+            activeHearts++;
             const heartDiv = document.createElement('div');
             heartDiv.classList.add('heart');
             const loveIcons = ['💖', '❤️', '💕', '💗', '🌸', '✨', '💘', '🌹'];
             heartDiv.innerHTML = loveIcons[Math.floor(Math.random() * loveIcons.length)];
-            const size = Math.random() * 22 + 18;
+            const size = Math.random() * 16 + 14;
             heartDiv.style.fontSize = size + 'px';
             heartDiv.style.left = Math.random() * 100 + '%';
-            heartDiv.style.animationDuration = (Math.random() * 3 + 2.8) + 's';
-            heartDiv.style.opacity = Math.random() * 0.7 + 0.4;
+            heartDiv.style.animationDuration = (Math.random() * 3 + 2.5) + 's';
+            heartDiv.style.opacity = Math.random() * 0.6 + 0.3;
             document.getElementById('hearts').appendChild(heartDiv);
-            setTimeout(() => { if(heartDiv && heartDiv.remove) heartDiv.remove(); }, 5500);
+            
+            heartDiv.addEventListener('animationend', () => {
+                heartDiv.remove();
+                activeHearts--;
+            });
+            setTimeout(() => {
+                if(heartDiv.parentNode) {
+                    heartDiv.remove();
+                    activeHearts--;
+                }
+            }, 5500);
         }
         
+        // ==================== MUSIK ====================
         function startMusicWithCinematic() {
             if(music) {
                 music.currentTime = 0;
-                music.play().then(() => {
-                    music.volume = 0.45;
-                }).catch(e => {
-                    setTimeout(() => {
-                        music.play().catch(()=>{});
-                    }, 100);
-                });
+                music.play().catch(() => {});
+                music.volume = 0.4;
             }
         }
         
+        // ==================== CINEMATIC & START ====================
         function showCinematicAndContinue() {
             cinematicDiv.classList.add('active');
             startMusicWithCinematic();
@@ -618,6 +570,7 @@
             startButton.addEventListener('click', onStartClick);
         }
         
+        // ==================== ZOOM MODAL ====================
         const cards = document.querySelectorAll('.card');
         
         function openZoom(imgSrc, captionText) {
@@ -634,7 +587,7 @@
                 if(!zoomModal.classList.contains('active')) {
                     modalImage.src = '';
                 }
-            }, 300);
+            }, 200);
         }
         
         cards.forEach(card => {
@@ -644,25 +597,21 @@
                 e.stopPropagation();
                 if(imgElement && imgElement.src) {
                     openZoom(imgElement.src, caption);
-                } else {
-                    openZoom('https://placehold.co/600x600/ff99cc/ffffff?text=❤️', caption);
                 }
             });
         });
         
-        if(closeModalBtn) {
-            closeModalBtn.addEventListener('click', closeZoom);
-        }
+        if(closeModalBtn) closeModalBtn.addEventListener('click', closeZoom);
         zoomModal.addEventListener('click', (e) => {
-            if(e.target === zoomModal) {
-                closeZoom();
-            }
+            if(e.target === zoomModal) closeZoom();
         });
         
+        // ==================== BINTANG (Dikurangi jumlahnya) ====================
         const starCanvas = document.getElementById('starsCanvas');
         let starCtx = starCanvas.getContext('2d');
         let starArray = [];
         let width, height;
+        let starAnimationId = null;
         
         function resizeStars() {
             width = window.innerWidth;
@@ -674,39 +623,36 @@
         
         function initStars() {
             starArray = [];
-            const starCount = Math.min(200, Math.floor(width * height / 5000));
+            const starCount = Math.min(80, Math.floor(width * height / 8000));
             for(let i=0; i<starCount; i++) {
                 starArray.push({
                     x: Math.random() * width,
                     y: Math.random() * height,
-                    radius: Math.random() * 2.2 + 1,
-                    alpha: Math.random() * 0.6 + 0.3,
-                    twinkle: Math.random() * 0.05 + 0.02
+                    radius: Math.random() * 1.8 + 0.8,
+                    alpha: Math.random() * 0.5 + 0.3
                 });
             }
         }
         
-        let starPhase = 0;
         function drawStars() {
             if(!starCtx) return;
             starCtx.clearRect(0, 0, width, height);
             for(let s of starArray) {
-                const twinkleFactor = 0.6 + 0.4 * Math.sin(starPhase + s.x * 0.01);
-                starCtx.globalAlpha = Math.min(0.9, s.alpha * twinkleFactor);
+                starCtx.globalAlpha = s.alpha;
                 starCtx.fillStyle = 'white';
                 starCtx.beginPath();
                 starCtx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
                 starCtx.fill();
             }
             starCtx.globalAlpha = 1;
-            starPhase += 0.02;
-            requestAnimationFrame(drawStars);
+            starAnimationId = requestAnimationFrame(drawStars);
         }
         
         window.addEventListener('resize', () => resizeStars());
         resizeStars();
         drawStars();
         
+        // ==================== SCROLL REVEAL ====================
         function revealCardsOnScroll() {
             const cardsAll = document.querySelectorAll('.card');
             cardsAll.forEach(card => {
@@ -726,11 +672,12 @@
                     cardObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.2, rootMargin: "0px 0px -30px 0px" });
+        }, { threshold: 0.2 });
         
         document.querySelectorAll('.card').forEach(card => cardObserver.observe(card));
         window.addEventListener('scroll', revealCardsOnScroll);
         
+        // ==================== ENDING (Lebih Lambat) ====================
         let endingRevealed = false;
         let endingAnimationStarted = false;
         
@@ -741,29 +688,20 @@
             const lines = document.querySelectorAll('#ending .line');
             const finalText = document.querySelector('#ending .final');
             
-            lines.forEach(line => {
-                line.style.opacity = "0";
-                line.style.transform = "translateY(30px)";
-            });
-            if(finalText) {
-                finalText.style.opacity = "0";
-                finalText.style.transform = "scale(0.96)";
-            }
-            
             lines.forEach((line, idx) => {
                 setTimeout(() => {
                     line.style.opacity = "1";
                     line.style.transform = "translateY(0px)";
-                }, idx * 880);
+                }, idx * 1000);
             });
             
-            const lastDelay = lines.length * 1600;
+            const lastDelay = lines.length * 1000;
             setTimeout(() => {
                 if(finalText) {
                     finalText.style.opacity = "1";
                     finalText.style.transform = "scale(1)";
                 }
-            }, lastDelay + 1000);
+            }, lastDelay + 600);
         }
         
         function checkEndingWithSlowReveal() {
@@ -774,15 +712,10 @@
             if(rect.top < window.innerHeight - 100) {
                 endingRevealed = true;
                 revealEndingLinesSlowly();
-                window.removeEventListener('scroll', scrollEndingCheck);
             }
         }
         
-        function scrollEndingCheck() {
-            checkEndingWithSlowReveal();
-        }
-        
-        window.addEventListener('scroll', scrollEndingCheck);
+        window.addEventListener('scroll', () => checkEndingWithSlowReveal());
         
         const endingObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -797,6 +730,7 @@
         const endingElement = document.getElementById('ending');
         if(endingElement) endingObserver.observe(endingElement);
         
+        // ==================== SECRET MESSAGE ====================
         if(secretTrigger) {
             secretTrigger.style.cursor = "pointer";
             secretTrigger.addEventListener('click', () => {
@@ -813,6 +747,7 @@
             });
         }
         
+        // ==================== FALLBACK GAMBAR ====================
         const allImgs = document.querySelectorAll('.card img');
         allImgs.forEach(img => {
             img.addEventListener('error', function() {
@@ -823,19 +758,7 @@
             });
         });
         
-        if(music) {
-            music.addEventListener('error', () => console.log("lagu.mp3 tidak ada"));
-        }
-        
-        const style = document.createElement('style');
-        style.innerHTML = `
-            .line { transition: opacity 0.9s cubic-bezier(0.2, 0.9, 0.4, 1.2), transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1); }
-            .final { transition: opacity 1.4s ease, transform 0.9s cubic-bezier(0.2, 0.9, 0.4, 1.2); }
-            #cinematic { transition: opacity 0.9s ease, visibility 0s linear 0.9s; }
-            #cinematic.active { transition: opacity 0.9s ease, visibility 0s linear 0s; }
-            #startScreen { transition: opacity 0.5s ease; }
-        `;
-        document.head.appendChild(style);
+        if(music) music.addEventListener('error', () => console.log("lagu.mp3 tidak ada"));
         
         mainDiv.style.display = "none";
     })();
