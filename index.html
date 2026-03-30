@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>For You Rinaa ❤️</title>
+    <title>For You Rinaa ❤️ | Happy Birthday</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,6 @@
         }
 
         body {
-            margin: 0;
             background: linear-gradient(135deg, #000000, #1a001a, #2d0030);
             color: #f5f5f5;
             text-align: center;
@@ -123,15 +122,17 @@
 
         #typing {
             font-size: 1rem;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.65);
             display: inline-block;
-            padding: 15px 20px;
-            border-radius: 24px;
+            padding: 18px 22px;
+            border-radius: 28px;
             margin: 20px 15px;
             max-width: 90%;
-            border: 1px solid rgba(255,128,191,0.4);
+            border: 1px solid rgba(255,128,191,0.5);
             text-align: left;
-            line-height: 1.5;
+            line-height: 1.6;
+            backdrop-filter: blur(2px);
+            font-weight: 400;
         }
 
         #gallery {
@@ -154,14 +155,15 @@
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 12px;
             transition: 0.2s ease;
             opacity: 0;
             transform: translateY(20px);
-            border: 1px solid rgba(255,200,230,0.2);
+            border: 1px solid rgba(255,200,230,0.25);
             cursor: pointer;
+            backdrop-filter: blur(4px);
         }
 
         .card:active {
@@ -170,7 +172,7 @@
 
         .card img {
             width: 100%;
-            border-radius: 16px;
+            border-radius: 18px;
             aspect-ratio: 1 / 1;
             object-fit: cover;
             background: #2a1a2a;
@@ -178,9 +180,10 @@
         }
 
         .card p {
-            margin-top: 8px;
+            margin-top: 10px;
             font-size: 0.8rem;
             font-weight: 500;
+            color: #ffdfef;
         }
 
         .zoom-modal {
@@ -224,8 +227,9 @@
             color: #ffc0e0;
             font-size: 0.9rem;
             background: rgba(0,0,0,0.7);
-            padding: 6px 16px;
-            border-radius: 30px;
+            padding: 8px 20px;
+            border-radius: 40px;
+            max-width: 85%;
         }
 
         .close-hint {
@@ -234,14 +238,15 @@
             right: 20px;
             color: white;
             font-size: 1.8rem;
-            background: rgba(0,0,0,0.5);
-            width: 40px;
-            height: 40px;
+            background: rgba(0,0,0,0.6);
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            font-weight: bold;
         }
 
         #ending {
@@ -251,34 +256,44 @@
 
         .line {
             opacity: 0;
-            margin: 25px auto;
+            margin: 28px auto;
             font-size: 1.1rem;
             max-width: 85%;
-            transition: opacity 0.6s ease;
+            transition: opacity 0.6s ease, transform 0.6s ease;
             transform: translateY(15px);
             color: #ffe6f0;
+            background: rgba(0,0,0,0.3);
+            display: inline-block;
+            width: auto;
+            padding: 8px 18px;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
         }
 
         .final {
             opacity: 0;
-            margin-top: 40px;
-            font-size: 1.6rem;
+            margin-top: 45px;
+            font-size: 1.8rem;
             color: #ff99cc;
-            text-shadow: 0 0 12px #ff4d94;
-            transition: opacity 0.8s ease;
+            text-shadow: 0 0 18px #ff4d94;
+            transition: opacity 0.9s ease;
         }
 
         #secret {
             position: fixed;
-            bottom: 20px;
-            right: 15px;
+            bottom: 25px;
+            right: 18px;
             background: #ff1493;
             color: white;
-            padding: 8px 16px;
-            border-radius: 30px;
+            padding: 10px 18px;
+            border-radius: 40px;
             font-size: 0.8rem;
             z-index: 200;
             display: none;
+            font-weight: bold;
+            box-shadow: 0 0 12px hotpink;
+            max-width: 75%;
+            text-align: center;
         }
 
         canvas#starsCanvas {
@@ -309,23 +324,23 @@
         }
 
         @keyframes fallHeart {
-            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0.9; }
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
         .credit {
-            margin-top: 20px;
-            font-size: 10px;
-            opacity: 0.4;
+            margin-top: 30px;
+            font-size: 11px;
+            opacity: 0.5;
         }
 
         @media (max-width: 640px) {
             .fadeText { font-size: 1.2rem; }
             .cake { font-size: 65px; }
-            .line { font-size: 1rem; margin: 20px auto; }
-            .final { font-size: 1.4rem; }
-            #typing { font-size: 0.9rem; padding: 12px 16px; }
-            .grid { gap: 12px; }
+            .line { font-size: 0.95rem; margin: 20px auto; padding: 6px 14px;}
+            .final { font-size: 1.5rem; }
+            #typing { font-size: 0.9rem; padding: 14px 18px; }
+            .grid { gap: 14px; }
             .card p { font-size: 0.7rem; }
         }
     </style>
@@ -336,8 +351,8 @@
 <div id="hearts"></div>
 
 <div id="startScreen" class="screen">
-    <h2>💌 pencet ya sayaangg 😘💖</h2>
-    <button id="btnStartNow">PENCET DISINII✨</button>
+    <h2>💌 pencet dibawah ya sayangg 😘💖</h2>
+    <button id="btnStartNow">PENCET DISINII ✨</button>
 </div>
 
 <div id="cinematic" class="screen">
@@ -353,69 +368,69 @@
 
     <div class="cake">🎂💖</div>
     <h1 id="secretTrigger">Happy Birthday Sayangkuu 💕</h1>
-    <p id="typing"></p>
+    <div id="typing"></div>
 
     <div id="gallery">
         <h2>📸 our memories 🤍</h2>
         <div class="grid">
             <div class="card" data-caption="foto masa masa kita masi jadi temen 🥺✨">
-                <img src="foto pertama masi temen.jpg" alt="Kenangan 1" onerror="this.src='https://placehold.co/300x300/ff99cc/ffffff?text=❤️'">
+                <img src="foto pertama masi temen.jpg" alt="Kenangan 1" onerror="this.src='https://placehold.co/300x300/ff99cc/ffffff?text=❤️+Cute'">
                 <p>foto masa masa kita masi jadi temen 🥺✨</p>
             </div>
             <div class="card" data-caption="ini foto yang difotoin sama canez pas banget 5 hari setelah kita jadian hihii 💖">
-                <img src="foto 5 hari abis jadian.jpg" alt="Kenangan 2" onerror="this.src='https://placehold.co/300x300/ffb3d9/660033?text=💖'">
+                <img src="foto 5 hari abis jadian.jpg" alt="Kenangan 2" onerror="this.src='https://placehold.co/300x300/ffb3d9/660033?text=💖+5+Hari'">
                 <p>ini foto yang difotoin sama canez pas banget 5 hari setelah kita jadian hihii 💖</p>
             </div>
             <div class="card" data-caption="kapan ya kita bisa jalan lagi sambil bercanda kaya gini 😭💕">
-                <img src="foto jalan ke ggp.jpg" alt="Kenangan 3" onerror="this.src='https://placehold.co/300x300/ff80bf/33001a?text=😭'">
+                <img src="foto jalan ke ggp.jpg" alt="Kenangan 3" onerror="this.src='https://placehold.co/300x300/ff80bf/33001a?text=😭+Jalan'">
                 <p>kapan ya kita bisa jalan lagi sambil bercanda kaya ginii 😭💕</p>
             </div>
             <div class="card" data-caption="ini momen pas kamu minta aku buat nyamperin kamu pas kamu lagi kerkom informatika ❤️">
-                <img src="foto tugas kerkom.jpg" alt="Kenangan 4" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
+                <img src="foto tugas kerkom.jpg" alt="Kenangan 4" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️+Kerkom'">
                 <p>ini momen pas kamu minta aku buat nyamperin kamu pas kamu lagi kerkom informatika ❤️</p>
             </div>
             <div class="card" data-caption="hari sumpah pemuda dimana hari itu pas banget 8 hari setelah kita jadiann 😆">
-                <img src="foto hari batik.jpg" alt="Kenangan 5" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
+                <img src="foto hari batik.jpg" alt="Kenangan 5" onerror="this.src='https://placehold.co/300x300/ff99cc/33001a?text=🎉+Sumpah+Pemuda'">
                 <p>hari sumpah pemuda dimana hari itu pas banget 8 hari setelah kita jadiann 😆</p>
             </div>
             <div class="card" data-caption="tepat 5 november 2025 kamu ngerayain ulang tahun akuu, dan itu menjadi hari yang paling berharga buat akuu 🥺💌">
-                <img src="foto ultah.jpg" alt="Kenangan 6" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
+                <img src="foto ultah.jpg" alt="Kenangan 6" onerror="this.src='https://placehold.co/300x300/ff88bb/33001a?text=🎂+Ultah+Aku'">
                 <p>tepat 5 november 2025 kamu ngerayain ulang tahun akuu, dan itu menjadi hari yang paling berharga buat akuu 🥺💌</p>
             </div>
             <div class="card" data-caption="foto dimana kamu pertama kali aku ajak ke perpusnas buat nemenin aku balikin bukuu 🥰">
-                <img src="foto jalan.jpg" alt="Kenangan 7" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
+                <img src="foto jalan.jpg" alt="Kenangan 7" onerror="this.src='https://placehold.co/300x300/ff99cc/33001a?text=📚+Perpusnas'">
                 <p>foto dimana kamu pertama kali aku ajak ke perpusnas buat nemenin aku balikin bukuu 🥰</p>
             </div>
             <div class="card" data-caption="ini juga masi di perpusnas wkwkwk ( itu yang dibelakang ngepain yakk 😂 )">
-                <img src="foto perpusnas.jpg" alt="Kenangan 8" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
+                <img src="foto perpusnas.jpg" alt="Kenangan 8" onerror="this.src='https://placehold.co/300x300/ffb3da/33001a?text=😂+Lucu'">
                 <p>ini juga masi di perpusnas wkwkwk ( itu yang dibelakang ngepain yakk 😂 )</p>
             </div>
             <div class="card" data-caption="klo ini foto pas kamu abis tampil di hari guruu ( padahal awal nya bilang nya bukan tampil tapi jadi tim perkap 🤪)">
-                <img src="foto rina tampil.jpg" alt="Kenangan 9" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
+                <img src="foto rina tampil.jpg" alt="Kenangan 9" onerror="this.src='https://placehold.co/300x300/ff99cc/660033?text=🎤+Hari+Guru'">
                 <p>klo ini foto pas kamu abis tampil di hari guruu ( padahal awal nya bilang nya bukan tampil tapi jadi tim perkap 🤪)</p>
             </div>
             <div class="card" data-caption="nah klo ini mah hati hati ada anomalii wkwkwk😵">
-                <img src="foto anomali.jpg" alt="Kenangan 10" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
+                <img src="foto anomali.jpg" alt="Kenangan 10" onerror="this.src='https://placehold.co/300x300/ff99cc/1a000d?text=🌀+Anomali'">
                 <p>nah klo ini mah hati hati ada anomalii wkwkwk😵</p>
             </div>
             <div class="card" data-caption="klo yang ini gatau kenapa dehh yaa awkkwowko🤣🥲">
-                <img src="foto gatau.jpg" alt="Kenangan 11" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
+                <img src="foto gatau.jpg" alt="Kenangan 11" onerror="this.src='https://placehold.co/300x300/ff88aa/33001a?text=😂+Random'">
                 <p>klo yang ini gatau kenapa dehh yaa awkkwowko🤣🥲</p>
             </div>
             <div class="card" data-caption="emm kayanya ini udah ngantuk bangett yaa ehehehe 😴😪">
-                <img src="foto bobo.png" alt="Kenangan 12" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
+                <img src="foto bobo.png" alt="Kenangan 12" onerror="this.src='https://placehold.co/300x300/ff99cc/1a000d?text=😴+Ngantuk'">
                 <p>emm kayanya ini udah ngantuk bangett yaa ehehehe 😴😪</p>
             </div>
             <div class="card" data-caption="nahini ada oraang cantik bangeett tiba tiba muncul di galeri hp akuu 😘">
-                <img src="foto rina.jpg" alt="Kenangan 13" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
+                <img src="foto rina.jpg" alt="Kenangan 13" onerror="this.src='https://placehold.co/300x300/ffb3da/33001a?text=💖+Cantik'">
                 <p>nahini ada oraang cantik bangeett tiba tiba muncul di galeri hp akuu 😘</p>
             </div>
             <div class="card" data-caption="nahh, klo yang ini tu muncul nya di laptop akuu ihihii, dan juga samaa orang nya cantik jugaaa😍">
-                <img src="foto rina cantik.jpg" alt="Kenangan 14" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
+                <img src="foto rina cantik.jpg" alt="Kenangan 14" onerror="this.src='https://placehold.co/300x300/ff99cc/33001a?text=✨+Cantik+Lagi'">
                 <p>nahh, klo yang ini tu muncul nya di laptop akuu ihihii, dan juga samaa orang nya cantik jugaaa😍</p>
             </div>
             <div class="card" data-caption="ini foto terakhir yang bakal muncul di memories ini, dimanaa ini adalah foto photobooth pertama kali kitaa dan juga menjadi foto pertama aku di photobooth karna sebelumnya aku gapernah punya rasa tertarik sama yang namanya photobooth ❤️🤨">
-                <img src="foto photobooth.jpg" alt="Kenangan 15" onerror="this.src='https://placehold.co/300x300/ff66aa/1a000d?text=❤️'">
+                <img src="foto photobooth.jpg" alt="Kenangan 15" onerror="this.src='https://placehold.co/300x300/ff66aa/33001a?text=📸+Photobooth'">
                 <p>ini foto terakhir yang bakal muncul di memories ini, dimanaa ini adalah foto photobooth pertama kali kitaa dan juga menjadi foto pertama aku di photobooth ❤️🤨</p>
             </div>
         </div>
@@ -462,7 +477,7 @@
         const c2 = document.getElementById('c2');
         const c3 = document.getElementById('c3');
         
-        // ==================== TYPING EFFECT ====================
+        // TYPING EFFECT
         const fullText = "ihihihii cieee, sekarang ada yang makin tuwaa 💖\n\nAkhirnya sekarang umur kamu udah sama kaya akuu.. 61 tahuun ehehe 🤭\n\nPertama-tamaa, aku mau minta maaf duluu yaa sayangku.. Karena aku gabisa ada disamping kamu disaat ulang tahun kamuu 🥺\nAku tau pasti kamu sedihh, dan jujur aku juga ngerasaa sedihh\nTapi ywdaa aku bikin ini khusus buat kamuu, biar sedikit bisa ngurangin rasa sedih kamu hari ini dan bisa bikin kamu seneeeng 🤍\n\nWalaupun sekarang aku gabisa ada disamping kamuu, semoga kamu tetep bisa ngerasain seberapa spesial nya hari ini yaa\n\nSekali lagii happy birthdayy yaa sayaangkuu 🎂✨\nSemoga semua yang kamu harapin bisa terwujudd dan semua hal baik dateng terus buat kamuu, dan doain ajaa yaa semogaa nanti diulang tahun kamu yang selanjutnyaa kita bisa ngerayain bareng barengg yaaa 💫\n\nFrom: Pacar kamu yang palingg nyebeeliiinnn 😜\nNote: Dibawah aku nyantumin beberapa foto foto kita berduaa, ini jawaban klo kamu suka nanyaa kenapa aku suka nyimpen foto-foto kamuu ato kita berduaa\nKarna aku mau foto-foto kita bisa menjadi kenangan yang selalu bisa kita inget teruss dan bisa kita liat teruuss ihihihii 😝";
         let typingIndex = 0;
         const typingEl = document.getElementById('typing');
@@ -476,14 +491,14 @@
                     typingEl.innerHTML += char;
                 }
                 typingIndex++;
-                setTimeout(typeWriter, 90);
+                setTimeout(typeWriter, 75);
             }
         }
         
-        // ==================== HEART RAIN (Dibatasi) ====================
+        // HEART RAIN
         let heartInterval = null;
         let activeHearts = 0;
-        const MAX_HEARTS = 25;
+        const MAX_HEARTS = 22;
         
         function startHeartRain() {
             if(heartInterval) clearInterval(heartInterval);
@@ -491,19 +506,19 @@
                 if(mainDiv && mainDiv.style.display === "block" && activeHearts < MAX_HEARTS) {
                     createHeart();
                 }
-            }, 350);
+            }, 380);
         }
         
         function createHeart() {
             activeHearts++;
             const heartDiv = document.createElement('div');
             heartDiv.classList.add('heart');
-            const loveIcons = ['💖', '❤️', '💕', '💗', '🌸', '✨', '💘', '🌹'];
+            const loveIcons = ['💖', '❤️', '💕', '💗', '🌸', '✨', '💘', '🌹', '💝'];
             heartDiv.innerHTML = loveIcons[Math.floor(Math.random() * loveIcons.length)];
             const size = Math.random() * 16 + 14;
             heartDiv.style.fontSize = size + 'px';
             heartDiv.style.left = Math.random() * 100 + '%';
-            heartDiv.style.animationDuration = (Math.random() * 3 + 2.5) + 's';
+            heartDiv.style.animationDuration = (Math.random() * 3 + 2.8) + 's';
             heartDiv.style.opacity = Math.random() * 0.6 + 0.3;
             document.getElementById('hearts').appendChild(heartDiv);
             
@@ -514,21 +529,21 @@
             setTimeout(() => {
                 if(heartDiv.parentNode) {
                     heartDiv.remove();
-                    activeHearts--;
+                    if(activeHearts > 0) activeHearts--;
                 }
-            }, 5500);
+            }, 5800);
         }
         
-        // ==================== MUSIK ====================
+        // MUSIK
         function startMusicWithCinematic() {
             if(music) {
                 music.currentTime = 0;
-                music.play().catch(() => {});
-                music.volume = 0.4;
+                music.play().catch(e => console.log("autoplay restricted", e));
+                music.volume = 0.35;
             }
         }
         
-        // ==================== CINEMATIC & START ====================
+        // CINEMATIC SEQUENCE
         function showCinematicAndContinue() {
             cinematicDiv.classList.add('active');
             startMusicWithCinematic();
@@ -546,15 +561,17 @@
                 cinematicDiv.style.visibility = "hidden";
                 cinematicDiv.style.opacity = "0";
                 mainDiv.style.display = "block";
+                document.body.style.overflow = "auto";
                 
                 typingEl.innerHTML = "";
                 typingIndex = 0;
                 typeWriter();
                 startHeartRain();
+                
                 setTimeout(() => {
                     revealCardsOnScroll();
                     checkEndingWithSlowReveal();
-                }, 300);
+                }, 350);
             }, 6800);
         }
         
@@ -570,7 +587,7 @@
             startButton.addEventListener('click', onStartClick);
         }
         
-        // ==================== ZOOM MODAL ====================
+        // ZOOM MODAL
         const cards = document.querySelectorAll('.card');
         
         function openZoom(imgSrc, captionText) {
@@ -606,12 +623,11 @@
             if(e.target === zoomModal) closeZoom();
         });
         
-        // ==================== BINTANG (Dikurangi jumlahnya) ====================
+        // STARS (minimalis)
         const starCanvas = document.getElementById('starsCanvas');
         let starCtx = starCanvas.getContext('2d');
         let starArray = [];
         let width, height;
-        let starAnimationId = null;
         
         function resizeStars() {
             width = window.innerWidth;
@@ -623,13 +639,13 @@
         
         function initStars() {
             starArray = [];
-            const starCount = Math.min(80, Math.floor(width * height / 8000));
+            const starCount = Math.min(90, Math.floor(width * height / 7000));
             for(let i=0; i<starCount; i++) {
                 starArray.push({
                     x: Math.random() * width,
                     y: Math.random() * height,
-                    radius: Math.random() * 1.8 + 0.8,
-                    alpha: Math.random() * 0.5 + 0.3
+                    radius: Math.random() * 2 + 0.8,
+                    alpha: Math.random() * 0.6 + 0.3
                 });
             }
         }
@@ -645,19 +661,19 @@
                 starCtx.fill();
             }
             starCtx.globalAlpha = 1;
-            starAnimationId = requestAnimationFrame(drawStars);
+            requestAnimationFrame(drawStars);
         }
         
         window.addEventListener('resize', () => resizeStars());
         resizeStars();
         drawStars();
         
-        // ==================== SCROLL REVEAL ====================
+        // REVEAL CARDS ON SCROLL + OBSERVER
         function revealCardsOnScroll() {
             const cardsAll = document.querySelectorAll('.card');
             cardsAll.forEach(card => {
                 const rect = card.getBoundingClientRect();
-                if(rect.top < window.innerHeight - 80) {
+                if(rect.top < window.innerHeight - 70) {
                     card.style.opacity = "1";
                     card.style.transform = "translateY(0px)";
                 }
@@ -677,7 +693,7 @@
         document.querySelectorAll('.card').forEach(card => cardObserver.observe(card));
         window.addEventListener('scroll', revealCardsOnScroll);
         
-        // ==================== ENDING (Lebih Lambat) ====================
+        // ENDING SLOW REVEAL
         let endingRevealed = false;
         let endingAnimationStarted = false;
         
@@ -692,16 +708,16 @@
                 setTimeout(() => {
                     line.style.opacity = "1";
                     line.style.transform = "translateY(0px)";
-                }, idx * 1000);
+                }, idx * 950);
             });
             
-            const lastDelay = lines.length * 1000;
+            const lastDelay = lines.length * 950;
             setTimeout(() => {
                 if(finalText) {
                     finalText.style.opacity = "1";
                     finalText.style.transform = "scale(1)";
                 }
-            }, lastDelay + 600);
+            }, lastDelay + 500);
         }
         
         function checkEndingWithSlowReveal() {
@@ -730,7 +746,7 @@
         const endingElement = document.getElementById('ending');
         if(endingElement) endingObserver.observe(endingElement);
         
-        // ==================== SECRET MESSAGE ====================
+        // SECRET MESSAGE
         if(secretTrigger) {
             secretTrigger.style.cursor = "pointer";
             secretTrigger.addEventListener('click', () => {
@@ -747,20 +763,22 @@
             });
         }
         
-        // ==================== FALLBACK GAMBAR ====================
+        // FALLBACK untuk gambar yang error tetap cantik
         const allImgs = document.querySelectorAll('.card img');
         allImgs.forEach(img => {
             img.addEventListener('error', function() {
-                if(!this.dataset.fallback) {
-                    this.dataset.fallback = "true";
-                    this.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ff99cc'/%3E%3Ctext x='50' y='55' font-size='14' text-anchor='middle' fill='white'%3E❤️%3C/text%3E%3C/svg%3E";
+                if(!this.dataset.fallbackFixed) {
+                    this.dataset.fallbackFixed = "true";
+                    this.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23ff99cc'/%3E%3Ctext x='50' y='55' font-size='16' text-anchor='middle' fill='white'%3E❤️%3C/text%3E%3C/svg%3E";
                 }
             });
         });
         
-        if(music) music.addEventListener('error', () => console.log("lagu.mp3 tidak ada"));
+        if(music) music.addEventListener('error', () => console.log("lagu.mp3 opsional tidak ditemukan"));
         
         mainDiv.style.display = "none";
+        document.body.style.overflow = "hidden";
+        setTimeout(() => { document.body.style.overflow = "auto"; }, 100);
     })();
 </script>
 </body>
